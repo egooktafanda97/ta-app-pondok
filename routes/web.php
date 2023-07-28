@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\homecontroller;
+use App\Http\Controllers\logincontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('/login',[logincontroller::class,'halamanlogin'])->name('login');
+Route::post('/postlogin',[logincontroller::class,'postlogin'])->name('postlogin');
+Route::get('/logout',[logincontroller::class,'logout'])->name('logout');
+route::group(['middleware' => ['auth']], function(){
+    Route::get('/home',[homecontroller::class,'index'])->name('home');
+
 });
