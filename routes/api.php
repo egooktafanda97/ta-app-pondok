@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use \App\Api\OperatorController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'middleware' =>  ["api"],
+    'prefix' => "operator"
+], function ($router) {
+    Route::post('/', [OperatorController::class, 'store']);
+    Route::patch('/{id}', [OperatorController::class, 'update']);
+    Route::delete('/{id}', [OperatorController::class, 'destory']);
+    Route::get('/', [OperatorController::class, 'show']);
+    Route::get('/{id}', [OperatorController::class, 'getId']);
 });

@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\User;
 use Illuminate\Support\Str;
 
@@ -16,13 +17,11 @@ class UserSeader extends Seeder
      */
     public function run()
     {
-        User::truncate();
         User::create([
-        'name' => 'Admin Aplikasi',
-        'email' => 'admin@gmail.com',
-        'password' => bcrypt('admin'),
-        'remember_token' => Str::random(60),
+            'nama' => 'Admin Aplikasi',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin'),
+            'remember_token' => Str::random(60),
         ]);
-
     }
 }
