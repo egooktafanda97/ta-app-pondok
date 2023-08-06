@@ -3,22 +3,22 @@
 namespace App\Http\Controllers;
 
 use Alert;
-use App\Models\Operator;
+use App\Models\Pengasuh;
 use App\Models\User;
 use App\Service\DataTableFormat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class OperatorController extends Controller
+class PengasuhController extends Controller
 {
     public function show()
     {
-        return view("Page.Operator.show");
+        return view("Page.Pengasuh.show");
     }
     public function show_data()
     {
         return DataTableFormat::Call()->query(function () {
-            return Operator::query()->with("user");
+            return Pengasuh::query()->with("user");
         })
             ->formatRecords(function ($result, $start) {
                 return $result->map(function ($item, $index) use ($start) {
@@ -36,10 +36,11 @@ class OperatorController extends Controller
             $validator = Validator::make($request->all(), [
                 'nama' => 'required|string|max:100',
                 'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan,Lainnya',
+                'tempat_lahir' => 'nullable|string|max:255',
                 'tanggal_lahir' => 'nullable|date',
-                'alamat' => 'nullable|string|max:255',
-                'no_telepon' => 'nullable|string|max:20',
-                'jabatan' => 'required|string|max:100',
+                'alamat_lengkap' => 'nullable|string|max:255',
+                'jabatan' => 'required|max:100',
+                'telepon' => 'nullable|string|max:20',
             ]);
             if ($validator->fails()) {
                 $errorMessages = $validator->messages();
@@ -56,14 +57,14 @@ class OperatorController extends Controller
                     'nama' => $request->input('nama'),
                     'email' => $request->input('email'),
                     'password' => bcrypt($request->input('password')),
-                    'role' => 'operator'
+                    'role' => 'pengasuh' 
                 ]);
 
-                $operatorData = $request->except(['nama', 'email', 'password']);
-                $operatorData['user_id'] = $user->id;
-                $operatorData += $validator->validated();
-                $operator = Operator::create($operatorData);
-                if (!$operator) {
+                $pengasuhData = $request->except(['nama', 'email', 'password']);
+                $pengasuhData['user_id'] = $user->id;
+                $pengasuhData += $validator->validated();
+                $pengasuh = Pengasuh::create($pengasuhData);
+                if (!$pengasuh) {
                     Alert::error('Validation Error', 'gagal menyimpan data');
                     return redirect()->back();
                 }
@@ -82,12 +83,12 @@ class OperatorController extends Controller
             $validator = Validator::make($request->all(), [
                 'nama' => 'sometimes|required|string',
                 'jenis_kelamin' => 'sometimes',
+                'tempat_lahir' => 'sometimes|required|string',
                 'tanggal_lahir' => 'sometimes|required|date',
-                'alamat' => 'sometimes|required|string',
-                'no_telepon' => 'sometimes|required|string',
-                'jabatan' => 'sometimes|required|string',
-                'email' => 'nullable',
-                // Validasi email unik pada tabel users
+                'alamat_lengkap' => 'sometimes|required|string',
+                'jabatan' => 'sometimes|required',
+                'telepon' => 'sometimes|required|string',
+                'email' => 'nullable', // Validasi email unik pada tabel users
                 'password' => 'sometimes',
             ]);
             if ($validator->fails()) {
@@ -100,33 +101,28 @@ class OperatorController extends Controller
                 return redirect()->back();
             }
 
-            // Cari operator berdasarkan operator_id
-            $operator = Operator::findOrFail($id);
+            // Cari pengasuh berdasarkan id
+            $pengasuh = Pengasuh::findOrFail($id);
 
-            // Update data operator
-            $operator->update($request->only([
-                'nama',
-                'jenis_kelamin',
-                'tanggal_lahir',
-                'alamat',
-                'no_telepon',
-                'jabatan'
+            // Update data pengasuh
+            $pengasuh->update($request->only([
+                'nama', 'jenis_kelamin','tempat_lahir', 'tanggal_lahir', 'alamat_lengkap', 'jabatan','telepon'
             ]));
 
             if ($request->filled('nama')) {
-                $operator->user->email = $request->input('nama');
+                $pengasuh->user->email = $request->input('nama');
             }
             // Update data user (akun) jika input tidak kosong
             if ($request->filled('email')) {
-                $operator->user->email = $request->input('email');
+                $pengasuh->user->email = $request->input('email');
             }
 
             if ($request->filled('password')) {
-                $operator->user->password = bcrypt($request->input('password'));
+                $pengasuh->user->password = bcrypt($request->input('password'));
             }
 
             // Simpan perubahan pada user (akun)
-            $operator->user->save();
+            $pengasuh->user->save();
             Alert::success('Success', 'Data berhasil diupdate');
             return redirect()->back();
         } catch (\Throwable $th) {
@@ -137,9 +133,9 @@ class OperatorController extends Controller
     public function destroy($id)
     {
         try {
-            $op = Operator::find($id);
-            $userDelete = User::where("id", $op->user_id);
-            $op->delete();
+            $p = Pengasuh::find($id);
+            $userDelete = User::where("id", $p->user_id);
+            $p->delete();
             Alert::success('Success', 'Data berhasil dihapus');
             return redirect()->back();
         } catch (\Throwable $th) {

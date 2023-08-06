@@ -5,7 +5,7 @@ use App\Http\Controllers\homecontroller;
 use App\Http\Controllers\logincontroller;
 
 use App\Http\Controllers\{
-    OperatorController
+    OperatorController,OrangTuaController,GuruController,PengasuhController
 };
 
 /*
@@ -39,4 +39,35 @@ Route::group([
     Route::post('/', [OperatorController::class, 'store']);
     Route::post('/update/{id}', [OperatorController::class, 'update']);
     Route::get('/destroy/{id}', [OperatorController::class, 'destroy']);
+});
+
+Route::group([
+    'middleware' =>  ["web"],
+    'prefix' => "orangtua"
+], function ($router) {
+    Route::get('/', [OrangTuaController::class, 'show']);
+    Route::get('/show-data', [OrangTuaController::class, 'show_data']);
+    Route::post('/', [OrangTuaController::class, 'store']);
+    Route::post('/update/{id}', [OrangTuaController::class, 'update']);
+    Route::get('/destroy/{id}', [OrangTuaController::class, 'destroy']);
+});
+Route::group([
+    'middleware' =>  ["web"],
+    'prefix' => "guru"
+], function ($router) {
+    Route::get('/', [GuruController::class, 'show']);
+    Route::get('/show-data', [GuruController::class, 'show_data']);
+    Route::post('/', [GuruController::class, 'store']);
+    Route::post('/update/{id}', [GuruController::class, 'update']);
+    Route::get('/destroy/{id}', [GuruController::class, 'destroy']);
+});
+Route::group([
+    'middleware' =>  ["web"],
+    'prefix' => "pengasuh"
+], function ($router) {
+    Route::get('/', [PengasuhController::class, 'show']);
+    Route::get('/show-data', [PengasuhController::class, 'show_data']);
+    Route::post('/', [PengasuhController::class, 'store']);
+    Route::post('/update/{id}', [PengasuhController::class, 'update']);
+    Route::get('/destroy/{id}', [PengasuhController::class, 'destroy']);
 });

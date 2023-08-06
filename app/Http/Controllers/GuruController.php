@@ -3,22 +3,22 @@
 namespace App\Http\Controllers;
 
 use Alert;
-use App\Models\Operator;
+use App\Models\Guru;
 use App\Models\User;
 use App\Service\DataTableFormat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class OperatorController extends Controller
+class GuruController extends Controller
 {
     public function show()
     {
-        return view("Page.Operator.show");
+        return view("Page.Guru.show");
     }
     public function show_data()
     {
         return DataTableFormat::Call()->query(function () {
-            return Operator::query()->with("user");
+            return Guru::query()->with("user");
         })
             ->formatRecords(function ($result, $start) {
                 return $result->map(function ($item, $index) use ($start) {
@@ -31,15 +31,16 @@ class OperatorController extends Controller
             ->json();
     }
     public function store(Request $request)
-    {
-        try {
+    { {
             $validator = Validator::make($request->all(), [
+                'nuptk' => 'required|string|max:100',
                 'nama' => 'required|string|max:100',
                 'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan,Lainnya',
+                'tempat_lahir' => 'nullable|string|max:255',
                 'tanggal_lahir' => 'nullable|date',
-                'alamat' => 'nullable|string|max:255',
-                'no_telepon' => 'nullable|string|max:20',
-                'jabatan' => 'required|string|max:100',
+                'alamat_lengkap' => 'nullable|string|max:255',
+                'jabatan' => 'required|max:100',
+                'telepon' => 'nullable|string|max:20',
             ]);
             if ($validator->fails()) {
                 $errorMessages = $validator->messages();
@@ -56,22 +57,19 @@ class OperatorController extends Controller
                     'nama' => $request->input('nama'),
                     'email' => $request->input('email'),
                     'password' => bcrypt($request->input('password')),
-                    'role' => 'operator'
+                    'role' => 'guru',
                 ]);
 
-                $operatorData = $request->except(['nama', 'email', 'password']);
-                $operatorData['user_id'] = $user->id;
-                $operatorData += $validator->validated();
-                $operator = Operator::create($operatorData);
-                if (!$operator) {
+                $guruData = $request->except(['nama', 'email', 'password']);
+                $guruData['user_id'] = $user->id;
+                $guruData += $validator->validated();
+                $guru = Guru::create($guruData);
+                if (!$guru) {
                     Alert::error('Validation Error', 'gagal menyimpan data');
                     return redirect()->back();
                 }
             });
             Alert::success('Success', 'Data berhasil disimpan');
-            return redirect()->back();
-        } catch (\Throwable $th) {
-            Alert::error('Validation Error', 'fatal error!');
             return redirect()->back();
         }
     }
@@ -80,12 +78,14 @@ class OperatorController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
+                'nuptk' => 'sometimes|required|string',
                 'nama' => 'sometimes|required|string',
                 'jenis_kelamin' => 'sometimes',
+                'tempat_lahir' => 'sometimes|required|string',
                 'tanggal_lahir' => 'sometimes|required|date',
-                'alamat' => 'sometimes|required|string',
-                'no_telepon' => 'sometimes|required|string',
-                'jabatan' => 'sometimes|required|string',
+                'alamat_lengkap' => 'sometimes|required|string',
+                'jabatan' => 'sometimes|required',
+                'telepon' => 'sometimes|required|string',
                 'email' => 'nullable',
                 // Validasi email unik pada tabel users
                 'password' => 'sometimes',
@@ -100,33 +100,35 @@ class OperatorController extends Controller
                 return redirect()->back();
             }
 
-            // Cari operator berdasarkan operator_id
-            $operator = Operator::findOrFail($id);
+            // Cari guru berdasarkan id
+            $guru = Guru::findOrFail($id);
 
-            // Update data operator
-            $operator->update($request->only([
+            // Update data guru
+            $guru->update($request->only([
                 'nama',
+                'nuptk',
                 'jenis_kelamin',
+                'tempat_lahir',
                 'tanggal_lahir',
-                'alamat',
-                'no_telepon',
-                'jabatan'
+                'alamat_lengkap',
+                'jabatan',
+                'telepon'
             ]));
 
             if ($request->filled('nama')) {
-                $operator->user->email = $request->input('nama');
+                $guru->user->email = $request->input('nama');
             }
             // Update data user (akun) jika input tidak kosong
             if ($request->filled('email')) {
-                $operator->user->email = $request->input('email');
+                $guru->user->email = $request->input('email');
             }
 
             if ($request->filled('password')) {
-                $operator->user->password = bcrypt($request->input('password'));
+                $guru->user->password = bcrypt($request->input('password'));
             }
 
             // Simpan perubahan pada user (akun)
-            $operator->user->save();
+            $guru->user->save();
             Alert::success('Success', 'Data berhasil diupdate');
             return redirect()->back();
         } catch (\Throwable $th) {
@@ -137,9 +139,9 @@ class OperatorController extends Controller
     public function destroy($id)
     {
         try {
-            $op = Operator::find($id);
-            $userDelete = User::where("id", $op->user_id);
-            $op->delete();
+            $g = Guru::find($id);
+            $userDelete = User::where("id", $g->user_id);
+            $g->delete();
             Alert::success('Success', 'Data berhasil dihapus');
             return redirect()->back();
         } catch (\Throwable $th) {

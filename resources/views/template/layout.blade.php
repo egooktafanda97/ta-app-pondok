@@ -106,9 +106,9 @@
                                             src="assets/images/user/avatar-1.jpg">
                                         <div class="media-body">
                                             <p><strong>Sara Soudein</strong><span class="n-time text-muted"><i
-                                                        class="icon feather icon-clock m-r-10"></i>12 min</span></p>
-                                            <p>currently login</p>
-                                        </div>
+  <p>currently login</p>
+                                        </div>                                                        class="icon feather icon-clock m-r-10"></i>12 min</span></p>
+                                          
                                     </div>
                                 </li>
                                 <li class="notification">
