@@ -15,7 +15,7 @@
                 <li class="nav-item">
                     <a class="nav-link " href="/operator">
                         <span class="pcoded-micon">
-                            <i class="feather icon-home"></i>
+                             <i class="feather icon-users"></i>
                         </span><span class="pcoded-mtext">Operator</span>
                     </a>
                 </li>

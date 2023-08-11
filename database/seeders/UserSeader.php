@@ -20,8 +20,9 @@ class UserSeader extends Seeder
         User::create([
             'nama' => 'Admin Aplikasi',
             'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin'),
+            'password' => bcrypt('password'),
             'remember_token' => Str::random(60),
+            'role' => 'SUPER-ADMIN',
         ]);
     }
 }
