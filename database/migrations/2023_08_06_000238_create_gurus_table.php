@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -13,7 +14,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('guru', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements("id");
             $table->unsignedBigInteger('user_id');
             $table->string('nuptk', 100)->unique();
             $table->string('nama', 200);
@@ -26,7 +27,6 @@ return new class extends Migration {
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-
         });
     }
 

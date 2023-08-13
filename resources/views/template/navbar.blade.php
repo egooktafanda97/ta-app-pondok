@@ -15,8 +15,22 @@
                 <li class="nav-item">
                     <a class="nav-link " href="/operator">
                         <span class="pcoded-micon">
-                             <i class="feather icon-users"></i>
+                            <i class="feather icon-users"></i>
                         </span><span class="pcoded-mtext">Operator</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/register-siswa">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-users"></i>
+                        </span><span class="pcoded-mtext">Data Pendaftaran</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/hafalan">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-users"></i>
+                        </span><span class="pcoded-mtext">Progres Hafalan</span>
                     </a>
                 </li>
                 <li class="nav-item">

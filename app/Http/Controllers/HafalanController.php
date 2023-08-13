@@ -1,0 +1,101 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\hafalan as Hafalan;
+use App\Models\Siswa;
+use App\Service\DataTableFormat;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
+class HafalanController extends Controller
+{
+    public function show()
+    {
+        $data["siswa"] = Siswa::where("status_siswa", "active")->get();
+        $data["Juz"] = Hafalan::Juzz();
+        $data["Surat"] = Hafalan::Surat();
+        return view("Page.hafalan.show", $data);
+    }
+    public function siswa_hafalan_show($id = null)
+    {
+        return DataTableFormat::Call()->query(function () use ($id) {
+            return Hafalan::where("siswa_id", $id)
+                ->with(["guru", "siswa"]);
+        })
+            ->formatRecords(function ($result, $start) {
+                return $result->map(function ($item, $index) use ($start) {
+                    $createdAt = Carbon::parse($item['created_at']);
+                    $item['no'] = $start + 1;
+                    $item['nama_siswa'] = $item['siswa']["nama_lengkap"];
+                    $item['nama_guru'] = $item['guru']["nama"];
+                    $item['juz'] = $item["juz"];
+                    $item['nama_surat'] = $item["nama_surat"];
+                    $item['ayat_start'] = $item["ayat_start"];
+                    $item['ayat_end'] = $item["ayat_end"];
+                    $item['catatan'] = $item["catatan"];
+                    $item["tanggal"] = $createdAt->format('d M  Y');
+                    return $item;
+                });
+            })
+            ->Short("id")
+            ->get()
+            ->json();
+    }
+    public function store(Request $request)
+    {
+        try {
+            $data = [
+                'siswa_id' => $request->siswa_id,
+                'guru_id' => auth()->user()->id ?? 1,
+                'juz' => $request->juz,
+                'nama_surat' => $request->nama_surat,
+                'ayat_start' => $request->ayat_start,
+                'ayat_end' => $request->ayat_end,
+                'catatan' => $request->catatan
+            ];
+
+            Hafalan::create($data);
+            Alert::success('Success', 'Data berhasil disimpan');
+            return redirect("hafalan/show/" . $request->siswa_id);
+        } catch (\Exception $e) {
+            Alert::error($e->getMessage());
+            return redirect()->back();
+        }
+    }
+    public function update(Request $request, $id)
+    {
+        try {
+            $hafalan = Hafalan::find($id);
+            $data = [
+                'siswa_id' => $request->siswa_id,
+                'guru_id' => auth()->user()->id ?? 1,
+                'juz' => $request->juz,
+                'nama_surat' => $request->nama_surat,
+                'ayat_start' => $request->ayat_start,
+                'ayat_end' => $request->ayat_end,
+                'catatan' => $request->catatan
+            ];
+            $hafalan->update($data);
+            Alert::success('Success', 'Data berhasil diedit');
+            return redirect("hafalan/show/" . $request->siswa_id);
+        } catch (\Exception $e) {
+            Alert::error($e->getMessage());
+            return redirect()->back();
+        }
+    }
+    public function destroy($id)
+    {
+        try {
+            $hafalan = Hafalan::find($id);
+            $siswaId = $hafalan->siswa->id;
+            $hafalan->delete();
+            Alert::success('Success', 'Data berhasil diedit');
+            return redirect("hafalan/show/" . $siswaId);
+        } catch (\Exception $e) {
+            Alert::error($e->getMessage());
+            return redirect()->back();
+        }
+    }
+}

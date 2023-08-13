@@ -78,7 +78,7 @@
                                     <input class="form-control" id="nuptk" name="nuptk" type="text">
                                 </div>
                             </div>
-                           
+
                         </div>
                         <div class="row">
                             <div class="col-6">
@@ -132,8 +132,8 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="nama">Email:</label>
-                                    <input class="form-control" id="email" name="email" type="text">
+                                    <label for="nama">Username:</label>
+                                    <input class="form-control" id="username" name="username" type="text">
                                 </div>
                             </div>
                             <div class="col-6" id="pass">

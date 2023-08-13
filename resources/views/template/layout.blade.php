@@ -15,7 +15,7 @@
     <link href="{{ asset('dist/assets/css/plugins/prism-coy.css') }}" rel="stylesheet">
     <!-- vendor css -->
     <link href="{{ asset('dist/assets/css/style.css') }}" rel="stylesheet">
-
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     @vite(['resources/js/app.js'])
 
     @yield('style')
@@ -106,9 +106,9 @@
                                             src="assets/images/user/avatar-1.jpg">
                                         <div class="media-body">
                                             <p><strong>Sara Soudein</strong><span class="n-time text-muted"><i
-  <p>currently login</p>
-                                        </div>                                                        class="icon feather icon-clock m-r-10"></i>12 min</span></p>
-                                          
+                                                        <p>currently login</p>
+                                        </div> class="icon feather icon-clock m-r-10"></i>12 min</span></p>
+
                                     </div>
                                 </li>
                                 <li class="notification">

@@ -55,7 +55,7 @@ class GuruController extends Controller
             \DB::transaction(function () use ($request, $validator) {
                 $user = User::create([
                     'nama' => $request->input('nama'),
-                    'email' => $request->input('email'),
+                    'username' => $request->input('username'),
                     'password' => bcrypt($request->input('password')),
                     'role' => 'guru',
                 ]);

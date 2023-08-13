@@ -34,13 +34,13 @@ class OrangTuaController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
+                'nik' => 'required|string|max:100',
                 'nama' => 'required|string|max:100',
                 'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan,Lainnya',
                 'tempat_lahir' => 'nullable|string|max:255',
                 'tanggal_lahir' => 'nullable|date',
                 'telepon' => 'nullable|string|max:20',
-                'status_perkawinan' => 'nullable|string|max:255',
-                'jumlah_wali' => 'required|max:100',
+                "alamat_lengkap" => 'nullable|string|max:20',
             ]);
             if ($validator->fails()) {
                 $errorMessages = $validator->messages();
@@ -81,13 +81,13 @@ class OrangTuaController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
+                'nik' => 'sometimes|string|max:100',
                 'nama' => 'sometimes|required|string',
                 'jenis_kelamin' => 'sometimes',
                 'tempat_lahir' => 'sometimes|required|string',
                 'tanggal_lahir' => 'sometimes|required|date',
                 'telepon' => 'sometimes|required|string',
-                'status_perkawinan' => 'sometimes|required|string',
-                'jumlah_wali' => 'sometimes|required',
+                "alamat_lengkap" => 'nullable|string|max:20',
                 'email' => 'nullable',
                 // Validasi email unik pada tabel users
                 'password' => 'sometimes',
@@ -107,6 +107,7 @@ class OrangTuaController extends Controller
 
             // Update data orangtua
             $orangtua->update($request->only([
+                'nik',
                 'nama',
                 'jenis_kelamin',
                 'tempat_lahir',
