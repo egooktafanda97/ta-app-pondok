@@ -10,7 +10,8 @@ use App\Http\Controllers\{
     GuruController,
     HafalanController,
     PendaftaranController,
-    PengasuhController
+    PengasuhController,
+    SiswaController
 };
 
 /*
@@ -100,4 +101,17 @@ Route::group([
     Route::post('/store', [PendaftaranController::class, 'store']);
     Route::post('/update/{id}', [PendaftaranController::class, 'update']);
     Route::get('/destroy/{id}', [PendaftaranController::class, 'destroy']);
+});
+Route::group([
+    'middleware' =>  ["web"],
+    'prefix' => "siswa_register"
+], function ($router) {
+    Route::get('/', [SiswaController::class, 'show']);
+    Route::get('/show_detail/{id}', [SiswaController::class, 'show_detail']);
+    Route::get('/show_update/{id}', [SiswaController::class, 'show_update']);
+    Route::get('/show-data', [SiswaController::class, 'show_data']);
+    Route::get('/form', [SiswaController::class, 'form']);
+    Route::post('/store', [SiswaController::class, 'store']);
+    Route::post('/update/{id}', [SiswaController::class, 'update']);
+    Route::get('/destroy/{id}', [SiswaController::class, 'destroy']);
 });

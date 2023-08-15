@@ -53,6 +53,13 @@
                         </span><span class="pcoded-mtext">Pengasuh</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/siswa_register">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-users"></i>
+                        </span><span class="pcoded-mtext">Siswa</span>
+                    </a>
+                </li>
 
 
             </ul>

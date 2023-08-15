@@ -30,7 +30,7 @@
                 <form action="{{ route('postlogin') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="input-group mb-3">
-                        <input class="form-control" name="email" placeholder="Email" type="email">
+                        <input class="form-control" name="username" placeholder="username" type="username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>

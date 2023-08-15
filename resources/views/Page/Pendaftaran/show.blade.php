@@ -190,7 +190,7 @@
                     render: function(data, type, row) {
                         if (data == 'valid')
                             return `<span class="c-pill c-pill--success">${data}</span>`
-                        if (data == 'peding')
+                        if (data == 'pending')
                             return `<span class="c-pill c-pill--warning">${data}</span>`
                         if (data == 'invalid')
                             return `<span class="c-pill c-pill--danger">Outstanding</span>`

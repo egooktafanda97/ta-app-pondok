@@ -17,7 +17,8 @@ class Pendaftaran extends Model
         'tahun_ajaran',
         'asal_sekolah',
         'metode_pendaftaran',
-        'lampiran'
+        'lampiran',
+        'status'
     ];
 
     public function userPendaftar()

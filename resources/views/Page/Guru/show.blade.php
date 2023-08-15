@@ -27,7 +27,7 @@
                                     <th>Nutpk</th>
                                     <th>nama</th>
                                     <th>Jenis Kelamin</th>
-                                    <th>Tenpat Lahir</th>
+                                    <th>Tempat Lahir</th>
                                     <th>Tanggal Lahir</th>
                                     <th>Alamat</th>
                                     <th>Jabatan</th>
@@ -41,7 +41,7 @@
                                     <th>Nutpk</th>
                                     <th>nama</th>
                                     <th>Jenis Kelamin</th>
-                                    <th>Tenpat Lahir</th>
+                                    <th>Tempat Lahir</th>
                                     <th>Tanggal Lahir</th>
                                     <th>Alamat</th>
                                     <th>Jabatan</th>

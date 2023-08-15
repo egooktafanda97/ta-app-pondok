@@ -6,7 +6,7 @@
                 <div class="col-md-12">
                     <div class="flex justify-between">
                         <h1 class="text-white text-bold" style="font-size: 1.5em"> <a class="hover:text-gray-100 text-gray-300"
-                                href="/register-siswa"><i class="fa fa-arrow-left"></i></a> Data
+                                href="/siswa_register"><i class="fa fa-arrow-left"></i></a> Data
                             Pendaftaran</h1>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                                             <td class="p-2">Metode Pendaftaran</td>
                                             <td class="p-2">:</td>
                                             <td class="p-2">
-                                                {{$pendaftar->metode_pendaftaran == 'operator' ? 'Admin Sekolah': $pendaftar->metode_pendaftaran }}
+                                                {{ $pendaftar->metode_pendaftaran == 'mandiri' ? 'Daftar mandiri' : $pendaftar->metode_pendaftaran }}
                                             </td>
                                         </tr>
                                         <tr>
