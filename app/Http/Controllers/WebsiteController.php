@@ -10,4 +10,12 @@ class WebsiteController extends Controller
     {
         return view('website.index');
     }
+    public function about()
+    {
+        return view('website.berita');
+    }
+    public function newspapper()
+    {
+        return view('website.tentang');
+    }
 }

@@ -11,6 +11,7 @@ use App\Service\DataTableFormat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Http;
 
 class PendaftaranController extends Controller
 {
@@ -213,6 +214,44 @@ class PendaftaranController extends Controller
             $siswa->delete();
             $pendaftaran->orangTua()->delete();
             Alert::success("berhasil di hapus");
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Alert::error($e->getMessage());
+            return redirect()->back();
+        }
+    }
+    public function acc($id)
+    {
+        try {
+            $pen = Pendaftaran::find($id);
+            $pen->status = "valid";
+            $pen->save();
+            $use_sessions = \DB::table("user_connections")->where("status_connecting", true)->first();
+            Http::post('http://localhost:5040/send-message', [
+                "session" => $use_sessions->session_name,
+                "to" => $pen->orangTua->telepon,
+                "text" => "Assalamualaikum, kami informasikan kepada orangtua ananda " . $pen->siswa->nama_lengkap . " bahwa Pendaftaran di terima."
+            ]);
+            Alert::success("Siswa Telah Diterima");
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Alert::error($e->getMessage());
+            return redirect()->back();
+        }
+    }
+    public  function reject($id)
+    {
+        try {
+            $pen = Pendaftaran::find($id);
+            $pen->status = "reject";
+            $pen->save();
+            $use_sessions = \DB::table("user_connections")->where("status_connecting", true)->first();
+            Http::post('http://localhost:5040/send-message', [
+                "session" => $use_sessions->session_name,
+                "to" => $pen->orangTua->telepon,
+                "text" => "Assalamualaikum, kami informasikan kepada orangtua ananda " . $pen->siswa->nama_lengkap . " bahwa Mohon ma'af Pendaftaran atas belum di terima."
+            ]);
+            Alert::success("Siswa Ditolak");
             return redirect()->back();
         } catch (\Exception $e) {
             Alert::error($e->getMessage());

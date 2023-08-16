@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('tahun_ajaran', 20);
             $table->string('asal_sekolah', 20);
             $table->string('metode_pendaftaran', 20);
-            $table->text('lampiran');
+            $table->text('lampiran')->nullable();
             $table->string('status', 20);
             $table->timestamps();
 

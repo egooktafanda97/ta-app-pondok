@@ -9,9 +9,11 @@ use App\Http\Controllers\{
     OrangTuaController,
     GuruController,
     HafalanController,
+    MessageController,
     PendaftaranController,
     PengasuhController,
-    SiswaController
+    SiswaController,
+    BeritaController
 };
 
 /*
@@ -26,10 +28,13 @@ use App\Http\Controllers\{
 */
 
 Route::get('/', [\App\Http\Controllers\WebsiteController::class, "index"]);
+Route::get('/about', [\App\Http\Controllers\WebsiteController::class, "about"]);
+Route::get('/newspapper', [\App\Http\Controllers\WebsiteController::class, "newspapper"]);
 
 Route::get('/login', [logincontroller::class, 'halamanlogin'])->name('login');
 Route::post('/postlogin', [logincontroller::class, 'postlogin'])->name('postlogin');
 Route::get('/logout', [logincontroller::class, 'logout'])->name('logout');
+
 route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [homecontroller::class, 'index'])->name('home');
 });
@@ -101,6 +106,8 @@ Route::group([
     Route::post('/store', [PendaftaranController::class, 'store']);
     Route::post('/update/{id}', [PendaftaranController::class, 'update']);
     Route::get('/destroy/{id}', [PendaftaranController::class, 'destroy']);
+    Route::get('/acc/{id}', [PendaftaranController::class, 'acc']);
+    Route::get('/reject/{id}', [PendaftaranController::class, 'reject']);
 });
 Route::group([
     'middleware' =>  ["web"],
@@ -114,4 +121,23 @@ Route::group([
     Route::post('/store', [SiswaController::class, 'store']);
     Route::post('/update/{id}', [SiswaController::class, 'update']);
     Route::get('/destroy/{id}', [SiswaController::class, 'destroy']);
+});
+
+Route::group([
+    'middleware' =>  ["web"],
+    'prefix' => "wa"
+], function ($router) {
+    Route::get('/scann', [MessageController::class, 'show']);
+});
+
+Route::group([
+    'middleware' =>  ["web"],
+    'prefix' => "news"
+], function ($router) {
+    Route::get('/', [BeritaController::class, 'show']);
+    Route::get('/get-all', [BeritaController::class, 'getAll']);
+    Route::get('/get-id/{id}', [BeritaController::class, 'getId']);
+    Route::post('/store', [BeritaController::class, 'store']);
+    Route::post('/update/{id}', [BeritaController::class, 'update']);
+    Route::delete('/destroy/{id}', [BeritaController::class, 'destroy']);
 });

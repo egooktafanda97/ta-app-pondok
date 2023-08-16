@@ -54,12 +54,12 @@ class OperatorController extends Controller
             \DB::transaction(function () use ($request, $validator) {
                 $user = User::create([
                     'nama' => $request->input('nama'),
-                    'email' => $request->input('email'),
+                    'username' => $request->input('username'),
                     'password' => bcrypt($request->input('password')),
                     'role' => 'operator'
                 ]);
 
-                $operatorData = $request->except(['nama', 'email', 'password']);
+                $operatorData = $request->except(['nama', 'username', 'password']);
                 $operatorData['user_id'] = $user->id;
                 $operatorData += $validator->validated();
                 $operator = Operator::create($operatorData);

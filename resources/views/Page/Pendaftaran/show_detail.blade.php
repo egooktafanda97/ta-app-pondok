@@ -8,6 +8,16 @@
                         <h1 class="text-white text-bold" style="font-size: 1.5em"> <a class="hover:text-gray-100 text-gray-300"
                                 href="/register-siswa"><i class="fa fa-arrow-left"></i></a> Data
                             Pendaftaran</h1>
+                        <div>
+                            @if ($pendaftar->status != 'valid')
+                                <a class="btn btn-outline-success" href="javascript:void(0);"
+                                    onclick="confirmAction('accept')" type="button">
+                                    <i class="fa fa-save"></i> Terima</a>
+                                <a class="btn btn-outline-danger" href="javascript:void(0);"
+                                    onclick="confirmAction('reject')" type="button">
+                                    <i class="fa fa-close"></i> Tolak</a>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -33,7 +43,7 @@
                                             <td class="p-2">Metode Pendaftaran</td>
                                             <td class="p-2">:</td>
                                             <td class="p-2">
-                                                {{$pendaftar->metode_pendaftaran == 'operator' ? 'Admin Sekolah': $pendaftar->metode_pendaftaran }}
+                                                {{ $pendaftar->metode_pendaftaran == 'operator' ? 'Admin Sekolah' : $pendaftar->metode_pendaftaran }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -43,6 +53,18 @@
                                                 <a href="{{ asset('lampiran/' . $pendaftar->lampiran) }}">
                                                     <i class="fas fa-file-pdf"></i> Lampiran
                                                 </a>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="p-2">Status Pendaftaran</td>
+                                            <td class="p-2">:</td>
+                                            <td class="p-2">
+                                                @if ($pendaftar->status == 'valid')
+                                                    <span class="c-pill c-pill--success">Diterima</span>
+                                                @else
+                                                    <span class="c-pill c-pill--danger">Ditolak</span>
+                                                @endif
                                             </td>
                                         </tr>
                                     </table>
@@ -171,4 +193,30 @@
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        function confirmAction(actionType) {
+            var currentUrl = window.location.href;
+            var urlSegments = currentUrl.split('/');
+            var id = urlSegments[urlSegments.length - 1];
+            let actionText = actionType === 'accept' ? 'menerima' : 'menolak';
+            Swal.fire({
+                title: `Konfirmasi ${actionText}`,
+                text: `Apakah Anda yakin ingin ${actionText} siswa?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if (actionType === 'accept') {
+                        window.location.href = "/register-siswa/acc/" + id;
+                    } else {
+                        window.location.href = "/register-siswa/reject/" + id;
+                    }
+                }
+            });
+        }
+    </script>
 @endsection

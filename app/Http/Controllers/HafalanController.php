@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
 use App\Models\hafalan as Hafalan;
 use App\Models\Siswa;
 use App\Service\DataTableFormat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Http;
 
 class HafalanController extends Controller
 {
@@ -48,15 +50,25 @@ class HafalanController extends Controller
         try {
             $data = [
                 'siswa_id' => $request->siswa_id,
-                'guru_id' => auth()->user()->id ?? 1,
+                'guru_id' => Guru::whereUserId(auth()->user()->id)->first()->id,
                 'juz' => $request->juz,
                 'nama_surat' => $request->nama_surat,
                 'ayat_start' => $request->ayat_start,
                 'ayat_end' => $request->ayat_end,
                 'catatan' => $request->catatan
             ];
-
             Hafalan::create($data);
+            $siswa = Siswa::find($request->siswa_id);
+            $msg = "Assalamualaikum, kami informasikan kepada orangtua " . $siswa->nama_lengkap . " update terbaru progres hafalan anada pada Juz {$request->juz} surat {$request->nama_surat} ayat {$request->ayat_start} sampai dengan $request->ayat_end";
+            if (!empty($request->catatan)) {
+                $msg .= " dengan catatan {$request->catatan}";
+            }
+            $use_sessions = \DB::table("user_connections")->where("status_connecting", true)->first();
+            Http::post('http://localhost:5040/send-message', [
+                "session" => $use_sessions->session_name,
+                "to" => $siswa->orangTua->telepon,
+                "text" => $msg
+            ]);
             Alert::success('Success', 'Data berhasil disimpan');
             return redirect("hafalan/show/" . $request->siswa_id);
         } catch (\Exception $e) {

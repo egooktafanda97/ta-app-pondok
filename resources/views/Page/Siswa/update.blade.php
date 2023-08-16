@@ -166,14 +166,7 @@
                                         <textarea class="form-control" id="ortu_alamat_lengkap" name="ortu_alamat_lengkap" rows="3">{{ $pendaftar->OrangTua->alamat_lengkap ?? '' }}</textarea>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="ortu_telepon">Lampiran:</label>
-                                        <div><small><i class="text-green-500">lampiran berupa scann (SKL/Ijazah) dan syarat
-                                                    lainnya</i></small></div>
-                                        <input class="form-control" id="lampiran" name="lampiran" type="file">
-                                    </div>
-                                </div>
+
                                 <div class="col-12 mt-5">
                                     <div class="form-group w-full flex justify-end">
                                         <button class="w-50 btn btn-primary bg-blue-500" type="submit">DAFTAR</button>

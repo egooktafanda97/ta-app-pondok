@@ -132,26 +132,21 @@ class SiswaController extends Controller
                 throw new \Exception("pastikan data anda input dengan benar dan tidak boleh kosong!");
             }
 
-            $useUpload = Helper::Images($request, "lampiran", "lampiran");
-            if (!$useUpload->status) {
-                throw new \Exception("Opss! lampiran harus di isi");
-            }
-
             $pendaftaran = [
                 'user_pendaftar_id' => auth()->user()->id ?? 1,
                 'siswa_id' => $insSiswaSave->id,
                 'orang_tua_id' => $insOrangtuaSave->id,
                 'tahun_ajaran' => $request->input("tahun_ajaran") ?? "2023/2024",
                 'asal_sekolah' => $request->input("asal_sekolah"),
-                'metode_pendaftaran' => "mandiri",
-                'lampiran' => $useUpload->name,
-                'status' => "pending",
+                'metode_pendaftaran' => "operator",
+                'lampiran' => null,
+                'status' => "valid",
             ];
             if (!$insPendaftaranSave = Pendaftaran::create($pendaftaran)) {
                 throw new \Exception("pastikan data anda input dengan benar dan tidak boleh kosong!");
             }
 
-            Alert::success('Pendaftaran berhasil');
+            Alert::success('Data siswa berhasil disimpan');
             return redirect("/siswa_register");
         } catch (\Exception $e) {
             Alert::error($e->getMessage());
