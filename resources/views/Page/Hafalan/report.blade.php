@@ -82,31 +82,31 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>NIS</th>
                 <th>Nama Siswa</th>
-                <th>Tanggal Daftar</th>
-                <th>tahun Ajaran</th>
-                <th>Metode Pendafataran</th>
-                <th>Asal Sekolah</th>
-                <th>jenis Kelamin</th>
-                <th>Nama Orantua/wali</th>
+                <th>Nama Guru</th>
+                <th>Tanggal</th>
+                <th>Juz</th>
+                <th>Surat</th>
+                <th>Mulai Ayat</th>
+                <th>Sampai Ayat</th>
+                <th>Catatan</th>
             </tr>
         </thead>
         <tbody>
             @php
                 $no = 1;
             @endphp
-            @foreach ($result as $item)
+            @foreach ($rep as $item)
                 <tr>
                     <td>{{ $no++ }}</td>
                     <td>{{ $item->siswa->nis }}</td>
-                    <td>{{ $item->siswa->nama_lengkap }}</td>
+                    <td>{{ $item->guru->nama }}</td>
                     <td>{{ $item->created_at }}</td>
-                    <td>{{ $item->tahun_ajaran }}</td>
-                    <td>{{ $item->metode_pendaftaran }}</td>
-                    <td>{{ $item->asal_sekolah }}</td>
-                    <td>{{ $item->siswa->jenis_kelamin }}</td>
-                    <td>{{ $item->orangTua->nama }}</td>
+                    <td>{{ $item->juz }}</td>
+                    <td>{{ $item->nama_surat }}</td>
+                    <td>{{ $item->ayat_start }}</td>
+                    <td>{{ $item->ayat_end }}</td>
+                    <td>{{ $item->catatan }}</td>
                 </tr>
             @endforeach
         </tbody>

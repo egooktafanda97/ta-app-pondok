@@ -34,6 +34,7 @@ Route::get('/about', [\App\Http\Controllers\WebsiteController::class, "about"]);
 Route::get('/newspapper', [\App\Http\Controllers\WebsiteController::class, "newspapper"]);
 
 Route::get('/login', [logincontroller::class, 'halamanlogin'])->name('login');
+Route::get('/login/logout', [logincontroller::class, 'logout'])->name('logout');
 Route::post('/postlogin', [logincontroller::class, 'postlogin'])->name('postlogin');
 Route::get('/logout', [logincontroller::class, 'logout'])->name('logout');
 
@@ -89,6 +90,7 @@ Route::group([
 ], function ($router) {
     Route::get('/', [HafalanController::class, 'show']);
     Route::get('/show/{id?}', [HafalanController::class, 'show']);
+    Route::get('/laporan/{id?}', [HafalanController::class, 'laporan']);
     Route::get('/siswa-hafalan-show/{id?}', [HafalanController::class, 'siswa_hafalan_show']);
     Route::post('/store', [HafalanController::class, 'store']);
     Route::post('/update/{id}', [HafalanController::class, 'update']);
@@ -111,7 +113,6 @@ Route::group([
     Route::get('/acc/{id}', [PendaftaranController::class, 'acc']);
     Route::get('/reject/{id}', [PendaftaranController::class, 'reject']);
     Route::get('/laporan', [PendaftaranController::class, 'laporan']);
-
 });
 Route::group([
     'middleware' =>  ["web"],
@@ -144,7 +145,6 @@ Route::group([
     Route::post('/store', [BeritaController::class, 'store']);
     Route::post('/update/{id}', [BeritaController::class, 'update']);
     Route::delete('/destroy/{id}', [BeritaController::class, 'destroy']);
-   
 });
 Route::group([
     'middleware' =>  ["web"],
@@ -153,8 +153,6 @@ Route::group([
     Route::get('/', [BeritawebController::class, 'show']);
     Route::get('/get-all', [BeritawebController::class, 'getAll']);
     Route::get('/beritaview/{id}', [BeritawebController::class, 'getId']);
-   
-   
 });
 
 Route::group([
@@ -164,7 +162,6 @@ Route::group([
     Route::get('/', [WebsiteController::class, 'index']);
     Route::get('/form', [WebsiteController::class, 'form']);
     Route::post('/store', [WebsiteController::class, 'store']);
-  
 });
 Route::group([
     'middleware' =>  ["web"],
@@ -173,8 +170,4 @@ Route::group([
     Route::get('/', [WebsiteController::class, 'index']);
     Route::get('/tentang', [WebsiteController::class, 'tentang']);
     Route::get('/kontak', [WebsiteController::class, 'kontak']);
-
-  
 });
-
-

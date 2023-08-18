@@ -6,12 +6,20 @@
                 <div class="col-md-12">
                     <div class="d-flex">
                         <h1 class="text-white text-bold mr-auto p-2" style="font-size: 1.5em">DATA PENDAFTARAN</h1>
+                        <button class="btn btn-outline-light p-2 mr-1" data-target=".modal-form" data-toggle="modal"><i
+                                class="fa fa-filter"></i></button>
                         <a class="btn btn-outline-light p-2" href="/register-siswa/form" type="button">
-                            <i class="fa fa-save"></i> FORMULIR PENDAFTARAN</a> &nbsp; <a class="btn btn-outline-light p-2" href="/register-siswa/laporan" type="button">
-                                <i class="fa fa-print"></i> LAPORAN</a>
-                       
+                            <i class="fa fa-save"></i> FORMULIR PENDAFTARAN</a> &nbsp;
+                        @php
+                            $baseURL = '/register-siswa/laporan/';
+                            $queryParams = request()->query(); // Mengambil semua query parameter dari URL saat ini
+                            $queryString = http_build_query($queryParams); // Membuat string query parameter dari array
+                        @endphp
+                        <a class="btn btn-outline-light p-2" href="{{ $baseURL }}?{{ $queryString }}" type="button">
+                            <i class="fa fa-print"></i> LAPORAN</a>
+
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -29,6 +37,7 @@
                                     <th class="w-[25px]">No</th>
                                     <th>nis</th>
                                     <th>nama</th>
+                                    <th>Tahun Ajaran</th>
                                     <th>alamat lengkap</th>
                                     <th>asal sekolah</th>
                                     <th>Status</th>
@@ -40,6 +49,7 @@
                                     <th class="w-[25px]">No</th>
                                     <th>nis</th>
                                     <th>nama</th>
+                                    <th>Tahun Ajaran</th>
                                     <th>alamat lengkap</th>
                                     <th>asal sekolah</th>
                                     <th>Status</th>
@@ -48,6 +58,44 @@
                             </tfoot>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('modal')
+    <div aria-labelledby="myLargeModalLabel" aria-modal="true" class="modal fade modal-form" role="dialog"
+        style="padding-right: 17px;" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title h4" id="myLargeModalLabel">Filter</h6>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="get">
+                        <div class="form-group">
+                            <label for="nuptk">Thun Ajaran:</label>
+                            <select class="form-control" id="" name="tahun_ajaran">
+                                <option value="2023/2024">2023/2024</option>
+                                <option value="2022/2023">2022/2023</option>
+                                <option value="2021/2022">2021/2022</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="nuptk">Status:</label>
+                            <select class="form-control" id="" name="status">
+                                <option value="valid">Valid</option>
+                                <option value="pending">Pending</option>
+                                <option value="reject">Tolak</option>
+                            </select>
+                        </div>
+                        <div class="flex justify-end" style="width: 100%">
+                            <button class="btn btn-primary bg-blue-500 w-[200px]" type="submit">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -145,7 +193,18 @@
                 return '{}'; // Mengembalikan objek kosong jika parsing gagal
             }
         }
-        const URI = "/register-siswa/show-data";
+        // Get the current URL
+
+        let URI = "/register-siswa/show-data?";
+        const urlString = window.location.href;
+        const url = new URL(urlString);
+        const searchParams = url.searchParams;
+        const param1Value = searchParams.get('tahun_ajaran');
+        const param2Value = searchParams.get('status');
+        if (param1Value != null && param1Value != undefined)
+            URI += `tahun_ajaran=${param1Value}&`
+        if (param1Value != null && param1Value != undefined)
+            URI += `status=${param2Value}&`
         const tables = new DataTable("#tables", {
             processing: true,
             serverSide: true,
@@ -179,6 +238,10 @@
                     render: function(data, type, row) {
                         return `<a href="/register-siswa/show_detail/${row.id}" class="text-green-500">${data}</a>`
                     }
+                },
+                {
+                    data: "tahun_ajaran",
+                    className: 'editable'
                 },
                 {
                     data: "alamat_lengkap",

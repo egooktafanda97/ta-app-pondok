@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Helpers\Helper;
 use App\Models\OrangTua;
 use App\Models\Pendaftaran;
@@ -9,6 +10,7 @@ use App\Models\User;
 use App\Service\DataTableFormat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class WebsiteController extends Controller
@@ -79,7 +81,7 @@ class WebsiteController extends Controller
                 "tanggal_lahir" => $request->input("tanggal_lahir"),
                 "agama" => $request->input("agama"),
                 "alamat_lengkap" => $request->input("alamat_lengkap"),
-                "status_siswa" => "active"
+                "status_siswa" => "inActive"
             ];
 
             // dd($siswa, $orangtua);
@@ -104,7 +106,13 @@ class WebsiteController extends Controller
             if (!$insPendaftaranSave = Pendaftaran::create($pendaftaran)) {
                 throw new \Exception("pastikan data anda input dengan benar dan tidak boleh kosong!");
             }
+            $use_sessions = \DB::table("user_connections")->where("status_connecting", true)->first();
 
+            Http::post('http://localhost:5040/send-message', [
+                "session" => $use_sessions->session_name,
+                "to" => $request->input("ortu_telepon"),
+                "text" => "ananda " . $request->input("nama_lengkap") . " berhasil di daftarkan, tunggu validasi data dari operator sekolah untuk tindak lanjut perndaftaran anda."
+            ]);
             Alert::success('Data terdaftarkan !');
             return redirect("/");
         } catch (\Exception $e) {
@@ -112,5 +120,4 @@ class WebsiteController extends Controller
             return redirect()->back();
         }
     }
-
 }

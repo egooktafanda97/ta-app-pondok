@@ -6,13 +6,13 @@
                     <label>Navigation</label>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="index.html">
+                    <a class="nav-link " href="/home">
                         <span class="pcoded-micon">
                             <i class="feather icon-home"></i>
                         </span><span class="pcoded-mtext">Dashboard</span>
                     </a>
                 </li>
-                @if (auth()->user()->role == 'operator')
+                @if (auth()->user()->role == 'operator' || auth()->user()->role == 'SUPER-ADMIN')
                     <li class="nav-item">
                         <a class="nav-link " href="/operator">
                             <span class="pcoded-micon">
@@ -23,21 +23,21 @@
                     <li class="nav-item">
                         <a class="nav-link " href="/register-siswa">
                             <span class="pcoded-micon">
-                                <i class="feather icon-users"></i>
+                                <i class="las la-bullhorn"></i>
                             </span><span class="pcoded-mtext">Data Pendaftaran</span>
                         </a>
                     </li>
                 @endif
-                @if (auth()->user()->role == 'guru')
+                @if (auth()->user()->role == 'guru' || auth()->user()->role == 'SUPER-ADMIN')
                     <li class="nav-item">
                         <a class="nav-link " href="/hafalan">
                             <span class="pcoded-micon">
-                                <i class="feather icon-users"></i>
+                                <i class="lab la-pied-piper-hat"></i>
                             </span><span class="pcoded-mtext">Progres Hafalan</span>
                         </a>
                     </li>
                 @endif
-                @if (auth()->user()->role == 'operator')
+                @if (auth()->user()->role == 'operator' || auth()->user()->role == 'SUPER-ADMIN')
                     <li class="nav-item">
                         <a class="nav-link " href="/orangtua">
                             <span class="pcoded-micon">
@@ -68,11 +68,19 @@
                     <li class="nav-item">
                         <a class="nav-link " href="/wa/scann">
                             <span class="pcoded-micon">
-                                <i class="fa fa-whastapp"></i>
+                                <i class="lab la-whatsapp"></i>
                             </span><span class="pcoded-mtext">Scann Wa</span>
                         </a>
                     </li>
                 @endif
+
+                <li class="nav-item">
+                    <a class="nav-link " href="/login/logout">
+                        <span class="pcoded-micon">
+                            <i class="las la-sign-out-alt"></i>
+                        </span><span class="pcoded-mtext">Logout</span>
+                    </a>
+                </li>
 
             </ul>
         </div>

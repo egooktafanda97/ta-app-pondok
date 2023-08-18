@@ -21,8 +21,8 @@ class OrangTuaController extends Controller
             return OrangTua::query()->with("user");
         })
             ->formatRecords(function ($result, $start) {
-                return $result->map(function ($item, $index) use ($start) {
-                    $item['no'] = $start + 1;
+                return $result->map(function ($item, $index) use (&$start) {
+                    $item['no'] = $start++;
                     return $item;
                 });
             })

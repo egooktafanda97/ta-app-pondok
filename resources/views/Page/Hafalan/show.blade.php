@@ -41,6 +41,16 @@
             </div>
             <div class="card hidden" id="card-hafalan">
                 <div class="card-body">
+                    <div class="card-header">
+                        <div class="flex justify-end">
+                            @php
+                                $baseURL = '/hafalan/laporan/' . $id;
+                            @endphp
+                            <a class="btn btn-primary" href="{{ $baseURL }}" style="color:#111" target="_blank"
+                                type="button">
+                                <i class="fa fa-print"></i> LAPORAN</a>
+                        </div>
+                    </div>
                     <div class="w-full pb-10 pt-2">
                         <table class="display responsive nowrap" id="tables" style="width:100%">
                             <thead class="bg-gray-100 text-gray-500 shadow-md">

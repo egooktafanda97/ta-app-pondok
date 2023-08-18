@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Http;
 
 class HafalanController extends Controller
 {
-    public function show()
+    public function show($id = null)
     {
         $data["siswa"] = Siswa::where("status_siswa", "active")->get();
         $data["Juz"] = Hafalan::Juzz();
         $data["Surat"] = Hafalan::Surat();
+        $data["id"] = $id;
         return view("Page.hafalan.show", $data);
     }
     public function siswa_hafalan_show($id = null)
@@ -27,9 +28,9 @@ class HafalanController extends Controller
                 ->with(["guru", "siswa"]);
         })
             ->formatRecords(function ($result, $start) {
-                return $result->map(function ($item, $index) use ($start) {
+                return $result->map(function ($item, $index) use (&$start) {
                     $createdAt = Carbon::parse($item['created_at']);
-                    $item['no'] = $start + 1;
+                    $item['no'] = $start++;
                     $item['nama_siswa'] = $item['siswa']["nama_lengkap"];
                     $item['nama_guru'] = $item['guru']["nama"];
                     $item['juz'] = $item["juz"];
@@ -109,5 +110,11 @@ class HafalanController extends Controller
             Alert::error($e->getMessage());
             return redirect()->back();
         }
+    }
+    public function laporan($id)
+    {
+        $data["rep"] = Hafalan::where("siswa_id", $id)
+            ->with(["guru", "siswa"])->get();
+        return view("Page.hafalan.report", $data);
     }
 }

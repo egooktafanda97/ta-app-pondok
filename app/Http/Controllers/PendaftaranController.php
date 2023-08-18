@@ -29,9 +29,25 @@ class PendaftaranController extends Controller
         $data = $this->show_dataId($id);
         return view("Page.Pendaftaran.update", $data);
     }
-    public function laporan()
+    public function laporan(Request $request)
     {
-        return view("Page.Pendaftaran.laporan");
+        $currentYear = Carbon::now()->year;
+        $nextYear = $currentYear + 1;
+        $academicYear = $currentYear . '/' . $nextYear;
+        $th = $request->get("tahun_ajaran");
+        $status = $request->get("status");
+
+        if (!empty($th))
+            $academicYear = $th;
+
+        $data = [
+            "result" =>  Pendaftaran::with(["siswa", "OrangTua"])->where(function ($us) use ($academicYear, $status) {
+                $us->where("tahun_ajaran", $academicYear)
+                    ->where("status", $status);
+            })
+                ->orderBy("id", "desc")->get()
+        ];
+        return view("Page.Pendaftaran.laporan", $data);
     }
     public function show_dataId($id)
     {
@@ -60,18 +76,32 @@ class PendaftaranController extends Controller
         ];
         return $data;
     }
-    public function show_data()
+    public function show_data(Request $request)
     {
         $currentYear = Carbon::now()->year;
         $nextYear = $currentYear + 1;
         $academicYear = $currentYear . '/' . $nextYear;
-        return DataTableFormat::Call()->query(function () use ($academicYear) {
-            return Pendaftaran::where("tahun_ajaran", $academicYear)
+        $th = $request->get("tahun_ajaran");
+        $status = $request->get("status");
+
+        if (!empty($th))
+            $academicYear = $th;
+
+        return DataTableFormat::Call()->query(function () use ($academicYear, $status) {
+            return Pendaftaran::where(function ($us) use ($academicYear, $status) {
+                if (!empty($academicYear))
+                    $us->where("tahun_ajaran", $academicYear);
+                if (!empty($status))
+                    $us->where("status", $status);
+            })
                 ->with(["siswa", "OrangTua"]);
         })
+            // ->filter(function ($query) {
+            //     $query->where("jenis_kelamin", "Laki-laki");
+            // })
             ->formatRecords(function ($result, $start) {
-                return $result->map(function ($item, $index) use ($start) {
-                    $item['no'] = $start + 1;
+                return $result->map(function ($item, $index) use (&$start) {
+                    $item['no'] = $start++;
                     $item['nis'] = $item['siswa']["nis"];
                     $item['nama'] = $item['siswa']["nama_lengkap"];
                     $item['alamat_lengkap'] = $item['siswa']["alamat_lengkap"];
@@ -229,6 +259,8 @@ class PendaftaranController extends Controller
         try {
             $pen = Pendaftaran::find($id);
             $pen->status = "valid";
+            $pen->siswa->status_siswa = "active";
+            $pen->siswa->save();
             $pen->save();
             $use_sessions = \DB::table("user_connections")->where("status_connecting", true)->first();
             Http::post('http://localhost:5040/send-message', [

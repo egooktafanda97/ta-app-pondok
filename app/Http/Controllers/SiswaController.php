@@ -65,8 +65,8 @@ class SiswaController extends Controller
                 ->with(["siswa", "OrangTua"]);
         })
             ->formatRecords(function ($result, $start) {
-                return $result->map(function ($item, $index) use ($start) {
-                    $item['no'] = $start + 1;
+                return $result->map(function ($item, $index) use (&$start) {
+                    $item['no'] = $start++;
                     $item['nis'] = $item['siswa']["nis"];
                     $item['nama'] = $item['siswa']["nama_lengkap"];
                     $item['alamat_lengkap'] = $item['siswa']["alamat_lengkap"];

@@ -21,8 +21,8 @@ class PengasuhController extends Controller
             return Pengasuh::query()->with("user");
         })
             ->formatRecords(function ($result, $start) {
-                return $result->map(function ($item, $index) use ($start) {
-                    $item['no'] = $start + 1;
+                return $result->map(function ($item, $index) use (&$start) {
+                    $item['no'] = $start++;
                     return $item;
                 });
             })
@@ -57,7 +57,7 @@ class PengasuhController extends Controller
                     'nama' => $request->input('nama'),
                     'email' => $request->input('email'),
                     'password' => bcrypt($request->input('password')),
-                    'role' => 'pengasuh' 
+                    'role' => 'pengasuh'
                 ]);
 
                 $pengasuhData = $request->except(['nama', 'email', 'password']);
@@ -106,7 +106,7 @@ class PengasuhController extends Controller
 
             // Update data pengasuh
             $pengasuh->update($request->only([
-                'nama', 'jenis_kelamin','tempat_lahir', 'tanggal_lahir', 'alamat_lengkap', 'jabatan','telepon'
+                'nama', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'alamat_lengkap', 'jabatan', 'telepon'
             ]));
 
             if ($request->filled('nama')) {
