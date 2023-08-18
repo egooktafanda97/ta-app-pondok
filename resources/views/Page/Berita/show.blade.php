@@ -65,7 +65,7 @@
                                                 <button
                                                     class="bg-blue-500 hover:bg-blue-600 text-white font-bold rounded px-3 py-1 views"
                                                     data-target=".bd-example-modal-lg-berita" data-toggle="modal"
-                                                    data-url="{{ url('berita/get-id/' . $item->id) }}">
+                                                    data-url="{{ url('news/get-id/' . $item->id) }}">
                                                     <i class="fas fa-eye"></i>
                                                 </button>
                                                 <button

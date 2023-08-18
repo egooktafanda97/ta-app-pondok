@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pendaftaran', function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table->unsignedBigInteger('user_pendaftar_id');
+            $table->unsignedBigInteger('user_pendaftar_id')->nullable();
             $table->unsignedBigInteger('siswa_id');
             $table->unsignedBigInteger('orang_tua_id');
             $table->string('tahun_ajaran', 20);

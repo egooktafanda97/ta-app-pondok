@@ -24,6 +24,10 @@
     <!-- Facts Start -->
     <div class="container-fluid facts py-5 pt-lg-0">
         <div class="container py-5 pt-lg-0">
+            <div class="d-grid rounded gap-2 col-4 mx-auto mb-5">
+                <a href="/daftarmandiri/form" type="button" class="btn btn-warning btn-lg uppercase text-white mb-0 shadow " style="border-radius: 40px;
+                ">DAFTAR SEKARANG</a>
+            </div>
             <div class="row gx-0">
                 <div class="col-lg-6 wow zoomIn " data-wow-delay="0.1s">
                     <div class="bg-success  shadow d-flex align-items-center justify-content-center p-4"

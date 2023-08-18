@@ -31,6 +31,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('landing-page') }}/css/style.css" rel="stylesheet" />
+    
 </head>
 
 <body>
@@ -52,16 +53,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a class="nav-item nav-link active" href="index.html">Home</a>
-                    <a class="nav-item nav-link" href="about.html">Tentang</a>
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Berita</a>
-                        <div class="dropdown-menu m-0">
-                            <a class="dropdown-item" href="berita.html">Berita List</a>
-                            <a class="dropdown-item" href="detail.html">Berita View</a>
-                        </div>
-                    </div>
-                    <a class="nav-item nav-link" href="contact.html">Kontak</a>
+                    <a class="nav-item nav-link" href="/">Home</a>
+                    <a class="nav-item nav-link" href="/tentang">Tentang</a>
+                    <a class="nav-item nav-link" href="/berita">Berita</a>
+                    
+                    <a class="nav-item nav-link" href="/kontak">Kontak</a>
                 </div>
                 <butaton class="btn text-primary ms-3" data-bs-target="#searchModal" data-bs-toggle="modal"
                     type="button"><i class="fa fa-search"></i></butaton>
@@ -115,6 +111,8 @@
     <!-- Back to Top -->
     <a class="btn btn-lg btn-primary btn-lg-square rounded back-to-top" href="#"><i
             class="bi bi-arrow-up"></i></a>
+            
+            @include('sweetalert::alert')
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -127,6 +125,7 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('landing-page') }}/js/main.js"></script>
+    
 </body>
 
 </html>

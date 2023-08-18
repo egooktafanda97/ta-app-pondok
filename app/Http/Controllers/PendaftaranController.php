@@ -29,6 +29,10 @@ class PendaftaranController extends Controller
         $data = $this->show_dataId($id);
         return view("Page.Pendaftaran.update", $data);
     }
+    public function laporan()
+    {
+        return view("Page.Pendaftaran.laporan");
+    }
     public function show_dataId($id)
     {
         $pendaftar = Pendaftaran::with(["siswa", "OrangTua"])->where("id", $id)->first();

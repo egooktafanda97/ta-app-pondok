@@ -13,7 +13,9 @@ use App\Http\Controllers\{
     PendaftaranController,
     PengasuhController,
     SiswaController,
-    BeritaController
+    BeritaController,
+    BeritawebController,
+    WebsiteController,
 };
 
 /*
@@ -108,6 +110,8 @@ Route::group([
     Route::get('/destroy/{id}', [PendaftaranController::class, 'destroy']);
     Route::get('/acc/{id}', [PendaftaranController::class, 'acc']);
     Route::get('/reject/{id}', [PendaftaranController::class, 'reject']);
+    Route::get('/laporan', [PendaftaranController::class, 'laporan']);
+
 });
 Route::group([
     'middleware' =>  ["web"],
@@ -140,4 +144,37 @@ Route::group([
     Route::post('/store', [BeritaController::class, 'store']);
     Route::post('/update/{id}', [BeritaController::class, 'update']);
     Route::delete('/destroy/{id}', [BeritaController::class, 'destroy']);
+   
 });
+Route::group([
+    'middleware' =>  ["web"],
+    'prefix' => "berita"
+], function ($router) {
+    Route::get('/', [BeritawebController::class, 'show']);
+    Route::get('/get-all', [BeritawebController::class, 'getAll']);
+    Route::get('/beritaview/{id}', [BeritawebController::class, 'getId']);
+   
+   
+});
+
+Route::group([
+    'middleware' =>  ["web"],
+    'prefix' => "daftarmandiri"
+], function ($router) {
+    Route::get('/', [WebsiteController::class, 'index']);
+    Route::get('/form', [WebsiteController::class, 'form']);
+    Route::post('/store', [WebsiteController::class, 'store']);
+  
+});
+Route::group([
+    'middleware' =>  ["web"],
+    'prefix' => "/"
+], function ($router) {
+    Route::get('/', [WebsiteController::class, 'index']);
+    Route::get('/tentang', [WebsiteController::class, 'tentang']);
+    Route::get('/kontak', [WebsiteController::class, 'kontak']);
+
+  
+});
+
+

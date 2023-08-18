@@ -4,11 +4,14 @@
         <div class="page-block">
             <div class="row align-items-center">
                 <div class="col-md-12">
-                    <div class="flex justify-between">
-                        <h1 class="text-white text-bold" style="font-size: 1.5em">DATA PENDAFTARAN</h1>
-                        <a class="btn btn-outline-light" href="/register-siswa/form" type="button">
-                            <i class="fa fa-save"></i> FORMULIR PENDAFTARAN</a>
+                    <div class="d-flex">
+                        <h1 class="text-white text-bold mr-auto p-2" style="font-size: 1.5em">DATA PENDAFTARAN</h1>
+                        <a class="btn btn-outline-light p-2" href="/register-siswa/form" type="button">
+                            <i class="fa fa-save"></i> FORMULIR PENDAFTARAN</a> &nbsp; <a class="btn btn-outline-light p-2" href="/register-siswa/laporan" type="button">
+                                <i class="fa fa-print"></i> LAPORAN</a>
+                       
                     </div>
+                    
                 </div>
             </div>
         </div>
