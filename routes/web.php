@@ -170,4 +170,6 @@ Route::group([
     Route::get('/', [WebsiteController::class, 'index']);
     Route::get('/tentang', [WebsiteController::class, 'tentang']);
     Route::get('/kontak', [WebsiteController::class, 'kontak']);
+    Route::get('/visi', [WebsiteController::class, 'visi']);
+    Route::get('/misi', [WebsiteController::class, 'misi']);
 });

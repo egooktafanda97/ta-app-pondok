@@ -39,6 +39,14 @@ class WebsiteController extends Controller
     {
         return view("website.kontak");
     }
+    public function visi()
+    {
+        return view("website.visi");
+    }
+    public function misi()
+    {
+        return view("website.misi");
+    }
 
     public function store(Request $request)
     {

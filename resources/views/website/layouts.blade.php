@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Pondok pesantren</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('landing-page') }}/img/favicon.ico">
+    <title>Yayasan Markazul Qur'an Wassunnah</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="Free HTML Templates" name="keywords" />
     <meta content="Free HTML Templates" name="description" />
@@ -46,7 +47,7 @@
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
             <a class="navbar-brand p-0" href="index.html">
-                <h1 class="m-0"><i class="fa fa-mosque me-2"></i>Al-Zaytun</h1>
+                <h1 class="m-0"><i class="fa fa-mosque me-2"></i>Yayasan Markazul Qur'an Wassunnah</h1>
             </a>
             <button class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" type="button">
                 <span class="fa fa-bars"></span>
@@ -67,7 +68,7 @@
         <div class="carousel slide carousel-fade" data-bs-ride="carousel" id="header-carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img alt="Image" class="w-100" src="{{ asset('landing-page') }}/img/carousel01.jpg" />
+                    <img alt="Image" class="w-100" src="{{ asset('landing-page') }}/img/carousel-1.jpg" />
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px">
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">
@@ -81,7 +82,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img alt="Image" class="w-100" src="{{ asset('landing-page') }}/img/carousel02.jpg" />
+                    <img alt="Image" class="w-100" src="{{ asset('landing-page') }}/img/carousel-2.jpg" />
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px">
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">

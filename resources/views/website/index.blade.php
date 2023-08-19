@@ -74,10 +74,9 @@
                         </div>
                         <h4 class="mb-3">Visi</h4>
                         <p class="m-0">
-                            Amet justo dolor lorem kasd amet magna sea stet eos vero lorem
-                            ipsum dolore sed....
+                            Mewujudkan Generasi Emas yang Qurani....
                         </p>
-                        <a class="btn btn-lg btn-primary rounded" href="visi.html">
+                        <a class="btn btn-lg btn-primary rounded" href="/visi">
                             <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
@@ -90,10 +89,9 @@
                         </div>
                         <h4 class="mb-3">Misi</h4>
                         <p class="m-0">
-                            Amet justo dolor lorem kasd amet magna sea stet eos vero lorem
-                            ipsum dolore sed....
+                            1.Melaksanakan program hafalan Al-Quran 30 Juz selama masa belajar 6 tahun....
                         </p>
-                        <a class="btn btn-lg btn-primary rounded" href="misi.html">
+                        <a class="btn btn-lg btn-primary rounded" href="/misi">
                             <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
@@ -111,33 +109,26 @@
                     <div class="section-title position-relative pb-3 mb-5">
                         <h5 class="fw-bold text-primary text-uppercase">Tentang kami</h5>
                         <h1 class="mb-0">
-                            Pondok pesantren Al-Zaytun
-                        </h1>
+                            Yayasan Markazul Qur'an Wassunnah </h1>
+
                     </div>
                     <p class="mb-4">
-                        Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor
-                        sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem
-                        et sit, sed stet no labore lorem sit. Sanctus clita duo justo et
-                        tempor eirmod magna dolore erat amet
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Yayasan Markazul Quran Wassunnah atau yang disingkat dengan
+                        Yayasan MQS dibentuk pada tanggal 29 November 2021 oleh H. M. Sarin, Apt. Mulfiana, S.Farm dan Nur
+                        Pidayatai, Lc di Desa Petapahan. Yayasan MQS didirikan dalam rangka berpartisipasi untuk
+                        pengembangan syiar agama Islam dan Pendidikan anak yang menanamkan pengetahuan dan nilai-nilai
+                        ajaran Islam yang penuh dengan kemuliaan di Kabupaten Kuantan Singingi Provinsi Riau, Indonesia
+                        dengan tujuan menghasilkan generasi yang akan menjadi aset ummat Islam Indonesia melahirkan generasi
+                        pejuang, ulama dan pemimpin bangsa yang berakhlakul karimah.
                     </p>
-                    <div class="row g-0 mb-3">
-                        <div class="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
-                            <h5 class="mb-3">
-                                <i class="fa fa-check text-primary me-3"></i>Komputer
-                            </h5>
-                            <h5 class="mb-3">
-                                <i class="fa fa-check text-primary me-3"></i>Latihan kepemimpinan
-                            </h5>
-                        </div>
-                        <div class="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
-                            <h5 class="mb-3">
-                                <i class="fa fa-check text-primary me-3"></i>Olahraga
-                            </h5>
-                            <h5 class="mb-3">
-                                <i class="fa fa-check text-primary me-3"></i>Pertanian
-                            </h5>
-                        </div>
-                    </div>
+                    <p class="mb-4"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Markazul Quran Wassunnah memiliki tujuan yaitu menjadikan Pondok Pesantren sebagai
+                        wahana untuk menyebarkan luaskan ajaran agama Islam, menjadikan Pondok Pesantren sebagai wadah untuk
+                        menuntut Ilmu bagi para Santri sesuai dengan tuntunan Al-Quran dan Sunnah, menjadikan Pondok
+                        Pesantren sebagai lembaga pendidikan Islam yang akan melahirkan para Ahli Quran yang bertakwa dan
+                        berakhlakul karimah, menyiapkan sumber daya manusia yang berkualitas global serta mampu bersaing dan
+                        mengukir prestasi di kancah dunia, dan memfasilitasi para santri dengan fasilitas ruang yang sesuai
+                        standar yang menjadi faktor keberhasilan proses belajar mengajar.
+                    </p>
                     <div class="d-flex align-items-center mb-4 wow fadeIn" data-wow-delay="0.6s">
 
 
@@ -146,7 +137,7 @@
                 </div>
                 <div class="col-lg-5" style="min-height: 500px">
                     <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s"
+                        <img class="img-fluid rounded wow zoomIn" data-wow-delay="0.9s"
                             src="{{ asset('landing-page') }}/img/tentang.jpg" style="object-fit: cover" />
                     </div>
                 </div>

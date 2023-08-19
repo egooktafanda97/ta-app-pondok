@@ -16,7 +16,7 @@
                   </div>
                   <div class="ps-4">
                       <h5 class="mb-2">Telepon</h5>
-                      <h4 class="text-primary mb-0">+628 12 345 6789</h4>
+                      <h4 class="text-primary mb-0">-</h4>
                   </div>
               </div>
           </div>
@@ -27,7 +27,7 @@
                   </div>
                   <div class="ps-4">
                       <h5 class="mb-2">Email</h5>
-                      <h4 class="text-primary mb-0">info@example.com</h4>
+                      <h4 class="text-primary mb-0">-</h4>
                   </div>
               </div>
           </div>
@@ -38,7 +38,7 @@
                   </div>
                   <div class="ps-4">
                       <h5 class="mb-2">Alamat</h5>
-                      <h4 class="text-primary mb-0">Jl. Proklamasi, Taluk Kuantan, Riau</h4>
+                      <h4 class="text-primary mb-0">-</h4>
                   </div>
               </div>
           </div>
