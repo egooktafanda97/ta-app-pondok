@@ -1,0 +1,8 @@
+dist
+dist/*
+node_modules
+node_modules/*
+wa_credentials/*
+wa_credentials
+mysql/*
+mysql
