@@ -25,10 +25,11 @@
     <div class="container-fluid facts py-5 pt-lg-0">
         <div class="container py-5 pt-lg-0">
             <div class="d-grid rounded gap-2 col-4 mx-auto mb-5">
-                <a href="/daftarmandiri/form" type="button" class="btn btn-warning btn-lg uppercase text-white mb-0 shadow " style="border-radius: 40px;
-                ">DAFTAR SEKARANG</a>
+                <a class="btn btn-warning btn-lg uppercase text-white mb-0 shadow " href="/daftarmandiri/form"
+                    style="border-radius: 40px;
+                " type="button">DAFTAR SEKARANG</a>
             </div>
-            <div class="row gx-0">
+            {{-- <div class="row gx-0">
                 <div class="col-lg-6 wow zoomIn " data-wow-delay="0.1s">
                     <div class="bg-success  shadow d-flex align-items-center justify-content-center p-4"
                         style="height: 150px">
@@ -54,7 +55,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     <!-- Facts Start -->
@@ -121,7 +122,8 @@
                         dengan tujuan menghasilkan generasi yang akan menjadi aset ummat Islam Indonesia melahirkan generasi
                         pejuang, ulama dan pemimpin bangsa yang berakhlakul karimah.
                     </p>
-                    <p class="mb-4"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Markazul Quran Wassunnah memiliki tujuan yaitu menjadikan Pondok Pesantren sebagai
+                    <p class="mb-4"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Markazul Quran Wassunnah memiliki tujuan yaitu
+                        menjadikan Pondok Pesantren sebagai
                         wahana untuk menyebarkan luaskan ajaran agama Islam, menjadikan Pondok Pesantren sebagai wadah untuk
                         menuntut Ilmu bagi para Santri sesuai dengan tuntunan Al-Quran dan Sunnah, menjadikan Pondok
                         Pesantren sebagai lembaga pendidikan Islam yang akan melahirkan para Ahli Quran yang bertakwa dan
