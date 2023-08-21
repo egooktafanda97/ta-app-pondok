@@ -75,7 +75,7 @@
                                 Beriman
                             </h5>
                             <h1 class="display-1 text-white mb-md-4 animated zoomIn">
-                                Siswa yang beriman dan bertakwa
+                                Santri yang beriman dan bertakwa
                             </h1>
 
                         </div>
@@ -89,7 +89,7 @@
                                 Berpendidikan
                             </h5>
                             <h1 class="display-1 text-white mb-md-4 animated zoomIn">
-                                Menjadi siswa yang cerdas dan berpendidikan
+                                Menjadi santri yang cerdas dan berpendidikan
                             </h1>
 
                         </div>

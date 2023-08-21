@@ -19,7 +19,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h1>DATA SISWA</h1>
+                        <h1>DATA SANTRI</h1>
                     </div>
                     <div class="card-body">
                         <div class="w-full pb-10 pt-2">

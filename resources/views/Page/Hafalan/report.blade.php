@@ -82,7 +82,7 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama Siswa</th>
+                <th>Nama Santri</th>
                 <th>Nama Guru</th>
                 <th>Tanggal</th>
                 <th>Juz</th>

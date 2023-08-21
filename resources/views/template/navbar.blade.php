@@ -51,18 +51,18 @@
                                 <i class="feather icon-users"></i>
                             </span><span class="pcoded-mtext">Guru</span>
                         </a>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link " href="/pengasuh">
                             <span class="pcoded-micon">
                                 <i class="feather icon-users"></i>
                             </span><span class="pcoded-mtext">Pengasuh</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link " href="/siswa_register">
                             <span class="pcoded-micon">
                                 <i class="feather icon-users"></i>
-                            </span><span class="pcoded-mtext">Siswa</span>
+                            </span><span class="pcoded-mtext">Santri</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -81,7 +81,6 @@
                         </span><span class="pcoded-mtext">Logout</span>
                     </a>
                 </li>
-
             </ul>
         </div>
     </div>
