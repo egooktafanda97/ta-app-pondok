@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Alert;
-use App\Models\OrangTua;
+use App\Models\Pimpinan;
 use App\Models\User;
 use App\Models\Siswa;
 use App\Models\Hafalan;
@@ -11,20 +11,20 @@ use App\Service\DataTableFormat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class OrangTuaController extends Controller
+class PimpinanController extends Controller
 {
     public function show()
     {
-        return view("Page.OrangTua.show");
+        return view("Page.Pimpinan.show");
     }
     public function show_data()
     {
         return DataTableFormat::Call()->query(function () {
-            return OrangTua::query()->with("user");
+            return Pimpinan::query()->with("user");
         })
             ->formatRecords(function ($result, $start) {
-                return $result->map(function ($item, $index) use (&$start) {
-                    $item['no'] = $start++;
+                return $result->map(function ($item, $index) use ($start) {
+                    $item['no'] = $start + 1;
                     return $item;
                 });
             })
@@ -36,13 +36,12 @@ class OrangTuaController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'nik' => 'required|string|max:100',
                 'nama' => 'required|string|max:100',
                 'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan,Lainnya',
-                'tempat_lahir' => 'nullable|string|max:255',
                 'tanggal_lahir' => 'nullable|date',
-                'telepon' => 'nullable|string|max:20',
-                "alamat_lengkap" => 'nullable|string|max:20',
+                'alamat' => 'nullable|string|max:255',
+                'no_telepon' => 'nullable|string|max:20',
+                'jabatan' => 'required|string|max:100',
             ]);
             if ($validator->fails()) {
                 $errorMessages = $validator->messages();
@@ -57,16 +56,16 @@ class OrangTuaController extends Controller
             \DB::transaction(function () use ($request, $validator) {
                 $user = User::create([
                     'nama' => $request->input('nama'),
-                    'email' => $request->input('email'),
+                    'username' => $request->input('username'),
                     'password' => bcrypt($request->input('password')),
-                    'role' => 'orangtua'
+                    'role' => 'pimpinan'
                 ]);
 
-                $orangtuaData = $request->except(['nama', 'email', 'password']);
-                $orangtuaData['user_id'] = $user->id;
-                $orangtuaData += $validator->validated();
-                $orangtua = OrangTua::create($orangtuaData);
-                if (!$orangtua) {
+                $pimpinanData = $request->except(['nama', 'username', 'password']);
+                $pimpinanData['user_id'] = $user->id;
+                $pimpinanData += $validator->validated();
+                $pimpinan = Pimpinan::create($pimpinanData);
+                if (!$pimpinan) {
                     Alert::error('Validation Error', 'gagal menyimpan data');
                     return redirect()->back();
                 }
@@ -83,13 +82,12 @@ class OrangTuaController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'nik' => 'sometimes|string|max:100',
                 'nama' => 'sometimes|required|string',
                 'jenis_kelamin' => 'sometimes',
-                'tempat_lahir' => 'sometimes|required|string',
                 'tanggal_lahir' => 'sometimes|required|date',
-                'telepon' => 'sometimes|required|string',
-                "alamat_lengkap" => 'nullable|string|max:20',
+                'alamat' => 'sometimes|required|string',
+                'no_telepon' => 'sometimes|required|string',
+                'jabatan' => 'sometimes|required|string',
                 'email' => 'nullable',
                 // Validasi email unik pada tabel users
                 'password' => 'sometimes',
@@ -104,35 +102,33 @@ class OrangTuaController extends Controller
                 return redirect()->back();
             }
 
-            // Cari orangtua berdasarkan id
-            $orangtua = OrangTua::findOrFail($id);
+            // Cari operator berdasarkan operator_id
+            $pimpinan = Pimpinan::findOrFail($id);
 
-            // Update data orangtua
-            $orangtua->update($request->only([
-                'nik',
+            // Update data operator
+            $pimpinan->update($request->only([
                 'nama',
                 'jenis_kelamin',
-                'tempat_lahir',
                 'tanggal_lahir',
-                'telepon',
-                'status_perkawinan',
-                'jumlah_wali'
+                'alamat',
+                'no_telepon',
+                'jabatan'
             ]));
 
             if ($request->filled('nama')) {
-                $orangtua->user->email = $request->input('nama');
+                $pimpinan->user->email = $request->input('nama');
             }
             // Update data user (akun) jika input tidak kosong
             if ($request->filled('email')) {
-                $orangtua->user->email = $request->input('email');
+                $pimpinan->user->email = $request->input('email');
             }
 
             if ($request->filled('password')) {
-                $orangtua->user->password = bcrypt($request->input('password'));
+                $pimpinan->user->password = bcrypt($request->input('password'));
             }
 
             // Simpan perubahan pada user (akun)
-            $orangtua->user->save();
+            $pimpinan->user->save();
             Alert::success('Success', 'Data berhasil diupdate');
             return redirect()->back();
         } catch (\Throwable $th) {
@@ -143,9 +139,9 @@ class OrangTuaController extends Controller
     public function destroy($id)
     {
         try {
-            $ot = OrangTua::find($id);
-            $userDelete = User::where("id", $ot->user_id);
-            $ot->delete();
+            $op = Pimpinan::find($id);
+            $userDelete = User::where("id", $op->user_id);
+            $op->delete();
             Alert::success('Success', 'Data berhasil dihapus');
             return redirect()->back();
         } catch (\Throwable $th) {
@@ -158,28 +154,30 @@ class OrangTuaController extends Controller
 
     public function show_hafalan()
     {
-        return view("Page.OrangTua.hafalan");
+        return view("Page.Pimpinan.Laporan_hafalan.hafalan");
     }
-
     public function laporan($id)
     {
-        $user_id_orangtua = auth()->user()->id;
-        $id_orangtua = OrangTua::where("user_id", $user_id_orangtua)->first();
-        $id_siswa = Siswa::where("orang_tua_id", $id_orangtua->id)->first();
-        $id_hafalan ["rep"]= Hafalan::where("siswa_id", $id_siswa->id)->get();
+        $data["rep"] = Hafalan::where("siswa_id", $id)
+        ->with(["guru", "siswa"])->get();
+    return view("Page.Pimpinan.Laporan_hafalan.laporan", $data);  
+  }
 
-        return view("Page.orangtua.Laporan_hafalan.laporan", $id_hafalan);    
-    }
-    public function show_hafalanid()
+
+
+    public function show_santri()
     {
-        $user_id_orangtua = auth()->user()->id;
-        $id_orangtua = OrangTua::where("user_id", $user_id_orangtua)->first();
-        $id_siswa = Siswa::where("orang_tua_id", $id_orangtua->id)->first();
-        $id_hafalan ["rep"]= Hafalan::where("siswa_id", $id_siswa->id)->get();
-
-
-        return view("Page.orangtua.Laporan_hafalan.hafalan", $id_hafalan);    
+        return DataTableFormat::Call()->query(function () {
+            return Siswa::query();
+        })
+            ->formatRecords(function ($result, $start) {
+                return $result->map(function ($item, $index) use ($start) {
+                    $item['no'] = $start + 1;
+                    return $item;
+                });
+            })
+            ->Short("id")
+            ->get()
+            ->json();
     }
-
-   
 }

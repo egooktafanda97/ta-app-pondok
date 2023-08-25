@@ -128,4 +128,47 @@ class WebsiteController extends Controller
             return redirect()->back();
         }
     }
+    public function test()
+    {
+
+        // Data yang akan dikirim dalam format JSON
+        $data = array(
+            "session"=>"lOAnwocEeB",
+            "text"=>"tesluu",
+            "to"=>"6282284733404"
+        );
+
+        // Mengubah data menjadi format JSON
+        $jsonData = json_encode($data);
+
+        // URL tujuan
+        $url = 'http://localhost:5040/send-message';
+
+        // Inisialisasi cURL
+        $ch = curl_init($url);
+
+        // Menentukan opsi cURL
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+
+        // Melakukan permintaan cURL
+        $response = curl_exec($ch);
+
+        // Menutup koneksi cURL
+        curl_close($ch);
+
+        // Mem-parsing respons JSON
+        $responseData = json_decode($response, true);
+
+        // Menampilkan hasil parsing
+        if ($responseData) {
+            echo "Response:\n";
+            print_r($responseData);
+        } else {
+            echo "Failed to parse JSON response.\n";
+        }
+
+    }
 }

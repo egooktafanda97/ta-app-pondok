@@ -16,6 +16,7 @@ use App\Http\Controllers\{
     BeritaController,
     BeritawebController,
     WebsiteController,
+    PimpinanController,
 };
 
 /*
@@ -62,6 +63,12 @@ Route::group([
     Route::post('/', [OrangTuaController::class, 'store']);
     Route::post('/update/{id}', [OrangTuaController::class, 'update']);
     Route::get('/destroy/{id}', [OrangTuaController::class, 'destroy']);
+    Route::get('/laporan', [OrangTuaController::class, 'laporan']);
+    Route::get('/hafalan', [OrangTuaController::class, 'show_hafalan']);
+    Route::get('/laporan/{id}', [OrangTuaController::class, 'laporan']);
+    Route::get('/hafalansantri', [OrangTuaController::class, 'show_hafalanid']);
+   
+
 });
 Route::group([
     'middleware' =>  ["web"],
@@ -172,4 +179,24 @@ Route::group([
     Route::get('/kontak', [WebsiteController::class, 'kontak']);
     Route::get('/visi', [WebsiteController::class, 'visi']);
     Route::get('/misi', [WebsiteController::class, 'misi']);
+});
+
+
+Route::get('/tseting', [WebsiteController::class, 'test']);
+
+
+Route::group([
+    'middleware' =>  ["web"],
+    'prefix' => "pimpinan"
+], function ($router) {
+    Route::get('/', [PimpinanController::class, 'show']);
+    Route::get('/show-data', [PimpinanController::class, 'show_data']);
+    Route::get('/show-santri', [PimpinanController::class, 'show_santri']);
+    Route::post('/', [PimpinanController::class, 'store']);
+    Route::post('/update/{id}', [PimpinanController::class, 'update']);
+    Route::get('/destroy/{id}', [PimpinanController::class, 'destroy']);
+    Route::get('/hafalan', [PimpinanController::class, 'show_hafalan']);
+    Route::get('/laporan/{id?}', [PimpinanController::class, 'laporan']);
+
+
 });

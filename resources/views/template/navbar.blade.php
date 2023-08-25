@@ -21,6 +21,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link " href="/pimpinan">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-users"></i>
+                            </span><span class="pcoded-mtext">Pimpinan</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link " href="/register-siswa">
                             <span class="pcoded-micon">
                                 <i class="las la-bullhorn"></i>
@@ -28,7 +35,7 @@
                         </a>
                     </li>
                 @endif
-                @if (auth()->user()->role == 'guru' || auth()->user()->role == 'SUPER-ADMIN')
+                @if (auth()->user()->role == 'guru')
                     <li class="nav-item">
                         <a class="nav-link " href="/hafalan">
                             <span class="pcoded-micon">
@@ -73,6 +80,32 @@
                         </a>
                     </li>
                 @endif
+
+
+
+                {{-- LAPORAN HAFALAN ORANG TUA DAN PIMPINAN --}}
+
+                @if (auth()->user()->role == 'orangtua')
+                <li class="nav-item">
+                    <a class="nav-link " href="/orangtua/hafalansantri">
+                        <span class="pcoded-micon">
+                            <i class="lab la-pied-piper-hat"></i>
+                        </span><span class="pcoded-mtext">Progres Hafalan Anak</span>
+                    </a>
+                </li>
+            @endif
+                @if (auth()->user()->role == 'pimpinan')
+                <li class="nav-item">
+                    <a class="nav-link " href="/pimpinan/hafalan">
+                        <span class="pcoded-micon">
+                            <i class="lab la-pied-piper-hat"></i>
+                        </span><span class="pcoded-mtext">Progres Hafalan Santri</span>
+                    </a>
+                </li>
+            @endif
+
+                 {{-- LAPORAN HAFALAN ORANG TUA DAN PIMPINAN --}}
+
 
                 <li class="nav-item">
                     <a class="nav-link " href="/login/logout">

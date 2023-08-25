@@ -266,7 +266,7 @@ class PendaftaranController extends Controller
             Http::post('http://localhost:5040/send-message', [
                 "session" => $use_sessions->session_name,
                 "to" => $pen->orangTua->telepon,
-                "text" => "Assalamualaikum, kami informasikan kepada orangtua ananda " . $pen->siswa->nama_lengkap . " bahwa Pendaftaran di terima."
+                "text" => "Assalamualaikum, kami informasikan kepada orangtua ananda " . $pen->siswa->nama_lengkap . " bahwa Pendaftaran di terima." 
             ]);
             Alert::success("Siswa Telah Diterima");
             return redirect()->back();

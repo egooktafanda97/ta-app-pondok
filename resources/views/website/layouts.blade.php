@@ -32,7 +32,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('landing-page') }}/css/style.css" rel="stylesheet" />
-    
+
 </head>
 
 <body>
@@ -57,7 +57,7 @@
                     <a class="nav-item nav-link" href="/">Home</a>
                     <a class="nav-item nav-link" href="/tentang">Tentang</a>
                     <a class="nav-item nav-link" href="/berita">Berita</a>
-                    
+
                     <a class="nav-item nav-link" href="/kontak">Kontak</a>
                 </div>
                 <butaton class="btn text-primary ms-3" data-bs-target="#searchModal" data-bs-toggle="modal"
@@ -71,12 +71,10 @@
                     <img alt="Image" class="w-100" src="{{ asset('landing-page') }}/img/carousel-1.jpg" />
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px">
-                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">
-                                Beriman
-                            </h5>
+
+
                             <h1 class="display-1 text-white mb-md-4 animated zoomIn">
-                                Siswa yang beriman dan bertakwa
-                            </h1>
+                                Berilmu </h1>
 
                         </div>
                     </div>
@@ -85,12 +83,20 @@
                     <img alt="Image" class="w-100" src="{{ asset('landing-page') }}/img/carousel-2.jpg" />
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px">
-                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">
-                                Berpendidikan
-                            </h5>
+
                             <h1 class="display-1 text-white mb-md-4 animated zoomIn">
-                                Menjadi siswa yang cerdas dan berpendidikan
-                            </h1>
+                                Beriman </h1>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img alt="Image" class="w-100" src="{{ asset('landing-page') }}/img/carousel-1.jpg" />
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px">
+
+                            <h1 class="display-1 text-white mb-md-4 animated zoomIn">
+                                Berdakwah </h1>
 
                         </div>
                     </div>
@@ -112,8 +118,8 @@
     <!-- Back to Top -->
     <a class="btn btn-lg btn-primary btn-lg-square rounded back-to-top" href="#"><i
             class="bi bi-arrow-up"></i></a>
-            
-            @include('sweetalert::alert')
+
+    @include('sweetalert::alert')
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -126,7 +132,7 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('landing-page') }}/js/main.js"></script>
-    
+
 </body>
 
 </html>
