@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guru;
 use App\Models\hafalan as Hafalan;
+use App\Models\OrangTua;
 use App\Models\Siswa;
 use App\Service\DataTableFormat;
 use Carbon\Carbon;
@@ -116,5 +117,20 @@ class HafalanController extends Controller
         $data["rep"] = Hafalan::where("siswa_id", $id)
             ->with(["guru", "siswa"])->get();
         return view("Page.hafalan.report", $data);
+    }
+    public function show_bywali()
+    {
+        $orantua = OrangTua::where("user_id", auth()->user()->id)->first();
+        $data = [
+            "santri" => Siswa::where("orang_tua_id", $orantua->id)->first()
+        ];
+        return view("Page.hafalan.show_rep_wali", $data);
+    }
+    public function show_Id($id)
+    {
+        $data = [
+            "santri" => Siswa::where("id", $id)->first()
+        ];
+        return view("Page.hafalan.show_rep_wali", $data);
     }
 }

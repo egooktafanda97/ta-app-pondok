@@ -90,6 +90,8 @@ Route::group([
 ], function ($router) {
     Route::get('/', [HafalanController::class, 'show']);
     Route::get('/show/{id?}', [HafalanController::class, 'show']);
+    Route::get('/show-id/{id}', [HafalanController::class, 'show_Id']);
+    Route::get('/show-hafalan-bywali', [HafalanController::class, 'show_bywali']);
     Route::get('/laporan/{id?}', [HafalanController::class, 'laporan']);
     Route::get('/siswa-hafalan-show/{id?}', [HafalanController::class, 'siswa_hafalan_show']);
     Route::post('/store', [HafalanController::class, 'store']);
@@ -119,6 +121,7 @@ Route::group([
     'prefix' => "siswa_register"
 ], function ($router) {
     Route::get('/', [SiswaController::class, 'show']);
+    Route::get('/show-pimpinan', [SiswaController::class, 'showPimpinan']);
     Route::get('/show_detail/{id}', [SiswaController::class, 'show_detail']);
     Route::get('/show_update/{id}', [SiswaController::class, 'show_update']);
     Route::get('/show-data', [SiswaController::class, 'show_data']);

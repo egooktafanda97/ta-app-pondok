@@ -82,7 +82,7 @@ class PendaftaranController extends Controller
         $nextYear = $currentYear + 1;
         $academicYear = $currentYear . '/' . $nextYear;
         $th = $request->get("tahun_ajaran");
-        $status = $request->get("status");
+        $status = $request->get("status") ?? null;
 
         if (!empty($th))
             $academicYear = $th;

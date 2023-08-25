@@ -119,7 +119,7 @@ class WebsiteController extends Controller
             Http::post('http://localhost:5040/send-message', [
                 "session" => $use_sessions->session_name,
                 "to" => $request->input("ortu_telepon"),
-                "text" => "ananda " . $request->input("nama_lengkap") . " berhasil di daftarkan, tunggu validasi data dari operator sekolah untuk tindak lanjut perndaftaran anda."
+                "text" => "ananda " . $request->input("nama_lengkap") . " berhasil di daftarkan, tunggu validasi data dari operator sekolah untuk tindak lanjut perndaftaran anda.", " Untuk melihat hafalan santri anda dapat login ke website " . url("/login")
             ]);
             Alert::success('Data terdaftarkan !');
             return redirect("/");
