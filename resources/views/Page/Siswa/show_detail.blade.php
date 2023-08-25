@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="p-2 border border-dashed border-gray-400  h-full">
-                                    <h2>Data Siswa</h2>
+                                    <h2>Data Santri</h2>
                                     <hr>
                                     <table class="w-full">
                                         @foreach ($siswa as $key => $item)

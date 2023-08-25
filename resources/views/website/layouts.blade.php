@@ -74,7 +74,12 @@
 
 
                             <h1 class="display-1 text-white mb-md-4 animated zoomIn">
+<<<<<<< HEAD
                                 Berilmu </h1>
+=======
+                                Santri yang beriman dan bertakwa
+                            </h1>
+>>>>>>> 6eabd4acc0d48976ec6f4a0d53efddda1ce537af
 
                         </div>
                     </div>
@@ -85,6 +90,7 @@
                         <div class="p-3" style="max-width: 900px">
 
                             <h1 class="display-1 text-white mb-md-4 animated zoomIn">
+<<<<<<< HEAD
                                 Beriman </h1>
 
                         </div>
@@ -97,6 +103,10 @@
 
                             <h1 class="display-1 text-white mb-md-4 animated zoomIn">
                                 Berdakwah </h1>
+=======
+                                Menjadi santri yang cerdas dan berpendidikan
+                            </h1>
+>>>>>>> 6eabd4acc0d48976ec6f4a0d53efddda1ce537af
 
                         </div>
                     </div>

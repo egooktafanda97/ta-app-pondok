@@ -83,7 +83,7 @@
             <tr>
                 <th>No</th>
                 <th>NIS</th>
-                <th>Nama Siswa</th>
+                <th>Nama Santri</th>
                 <th>Tanggal Daftar</th>
                 <th>tahun Ajaran</th>
                 <th>Metode Pendafataran</th>
