@@ -95,7 +95,7 @@
                     <li class="nav-item">
                         <a class="nav-link " href="/hafalan/show-hafalan-bywali">
                             <span class="pcoded-micon">
-                                <i class="fa fa-user"></i>
+                                <i class="fa fa-file"></i>
                             </span><span class="pcoded-mtext">Laporan Hafalan Santri</span>
                         </a>
                     </li>
@@ -105,12 +105,20 @@
                     <li class="nav-item">
                         <a class="nav-link " href="/siswa_register/show-pimpinan">
                             <span class="pcoded-micon">
-                                <i class="fa fa-user"></i>
+                                <i class="fa fa-file"></i>
                             </span><span class="pcoded-mtext">Laporan Hafalan Santri</span>
                         </a>
                     </li>
                 @endif
-
+                @if (auth()->user()->role == 'operator' || auth()->user()->role == 'SUPER-ADMIN')
+                    <li class="nav-item">
+                        <a class="nav-link " href="/news">
+                            <span class="pcoded-micon">
+                                <i class="fa fa-file"></i>
+                            </span><span class="pcoded-mtext">Berita</span>
+                        </a>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link " href="/login/logout">
                         <span class="pcoded-micon">

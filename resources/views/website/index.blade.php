@@ -62,6 +62,16 @@
 
     <!-- Service Start -->
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="card" style="border: none">
+            <div class="card-body">
+                <div class="w-100"
+                    style="display: flex; justify-content: center; align-items: center; flex-direction: column">
+                    <h4>MOTO</h4>
+                    <h5>BERILMU, BERIMAN, BERDAKWA</h5>
+                </div>
+
+            </div>
+        </div>
         <div class="container py-5">
             <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px">
                 <h5 class="fw-bold text-primary text-uppercase">Visi & Misi</h5>
@@ -70,9 +80,7 @@
                 <div class="col-lg-6 col-md-6 wow zoomIn" data-wow-delay="0.3s">
                     <div
                         class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
-                        <div class="service-icon">
-                            <i class="fa fa-trophy text-white"></i>
-                        </div>
+
                         <h4 class="mb-3">Visi</h4>
                         <p class="m-0">
                             Mewujudkan Generasi Emas yang Qurani....
@@ -85,9 +93,7 @@
                 <div class="col-lg-6 col-md-6 wow zoomIn" data-wow-delay="0.6s">
                     <div
                         class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
-                        <div class="service-icon">
-                            <i class="fa fa-trophy text-white"></i>
-                        </div>
+
                         <h4 class="mb-3">Misi</h4>
                         <p class="m-0">
                             1.Melaksanakan program hafalan Al-Quran 30 Juz selama masa belajar 6 tahun....
@@ -147,4 +153,32 @@
         </div>
     </div>
     <!-- About End -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-7">
+                    <div class="section-title position-relative pb-3 mb-5">
+                        <h5 class="fw-bold text-primary text-uppercase">SEJARAH</h5>
+                        <h1 class="mb-0">
+                            Yayasan Markazul Qur'an Wassunnah </h1>
+
+                    </div>
+                    <p class="mb-4">
+                        ...
+                    </p>
+                    <div class="d-flex align-items-center mb-4 wow fadeIn" data-wow-delay="0.6s">
+
+
+                    </div>
+
+                </div>
+                <div class="col-lg-5" style="min-height: 500px">
+                    <div class="position-relative h-100">
+                        <img class="img-fluid rounded wow zoomIn" data-wow-delay="0.9s"
+                            src="{{ asset('landing-page') }}/img/tentang.jpg" style="object-fit: cover" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

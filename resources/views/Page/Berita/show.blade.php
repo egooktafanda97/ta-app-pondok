@@ -37,11 +37,6 @@
                                 <i class="fas fa-plus-square"></i>
                                 Add Data
                             </button>
-                            <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded ml-2"
-                                onclick="window.print()">
-                                <i class="fas fa-print"></i>
-                                Print
-                            </button>
                         </div>
                     </div>
                 </div>
