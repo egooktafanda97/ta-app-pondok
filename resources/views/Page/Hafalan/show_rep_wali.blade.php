@@ -15,36 +15,12 @@
     <!-- [ Main Content ] start -->
     <div class="row">
         <div class="col-sm-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="w-full pt-2">
-                                <label for="">Cari Nama Santri</label>
-                                <br>
-                                <select class="js-example-basic-single w-full" id="useSiswa" name="state">
-                                    <option value="">-- Pilih Data --</option>
-                                    @foreach ($siswa as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama_lengkap }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full mt-3">
-                        <hr>
-                        <button class="w-full btn btn-primary btn-sm hidden" data-target=".modal-form" data-toggle="modal"
-                            id="btn-hafalan">UPDATE PROGRESS
-                            HAFALAN</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card hidden" id="card-hafalan">
+            <div class="card" id="card-hafalan">
                 <div class="card-body">
                     <div class="card-header">
                         <div class="flex justify-end">
                             @php
-                                $baseURL = '/hafalan/laporan/' . $id;
+                                $baseURL = '/hafalan/laporan/' . $santri->id;
                             @endphp
                             <a class="btn btn-primary" href="{{ $baseURL }}" style="color:#111" target="_blank"
                                 type="button">
@@ -64,7 +40,6 @@
                                     <th>Mulai Ayat</th>
                                     <th>Sampai Ayat</th>
                                     <th>Catatan</th>
-                                    <th>#</th>
                                 </tr>
                             </thead>
                             <tfoot class="bg-gray-100 text-gray-500 shadow-md">
@@ -78,80 +53,10 @@
                                     <th>Mulai Ayat</th>
                                     <th>Sampai Ayat</th>
                                     <th>Catatan</th>
-                                    <th>#</th>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
-@section('modal')
-    <div aria-hidden="true" aria-labelledby="myLargeModalLabel" class="modal fade modal-form" role="dialog"
-        style="display: none;" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title h4" id="myLargeModalLabel">Form Input Data</h5>
-                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="/hafalan/store" id="form-entry" method="POST">
-                        @csrf
-                        <input name="siswa_id" type="text">
-                        <div class="row">
-                            <div class="col-6 w-full">
-                                <div class="form-group">
-                                    <label for="">Juz:</label>
-                                    <select class="form-control w-full" id="juz" name="juz">
-                                        <option value="">-- Pilih Juz --</option>
-                                        @foreach ($Juz as $items)
-                                            <option value="{{ $items }}">{{ $items }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-6 w-full">
-                                <div class="form-group">
-                                    <label for="">Surat:</label>
-                                    <select class="form-control js-surat w-full" id="nama_surat" name="nama_surat">
-                                        <option value="">-- Pilih Surat --</option>
-                                        @foreach ($Surat as $item)
-                                            <option value="{{ $item }}">{{ $item }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-6 w-full">
-                                <div class="form-group">
-                                    <label for="nuptk">Mulai Ayat:</label>
-                                    <input class="form-control" id="ayat_start" name="ayat_start" type="text">
-                                </div>
-                            </div>
-                            <div class="col-6 w-full">
-                                <div class="form-group">
-                                    <label for="nuptk">Selesai Ayat:</label>
-                                    <input class="form-control" id="ayat_end" name="ayat_end" type="text">
-                                </div>
-                            </div>
-                            <div class="col-12 w-full">
-                                <div class="form-group">
-                                    <label for="nuptk">Catatan:</label>
-                                    <textarea class="form-control" id="catatan" name="catatan" rows="3"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="flex justify-end" style="width: 100%">
-                            <button class="btn btn-primary bg-blue-500 w-[200px]" type="submit">Simpan</button>
-                        </div>
-
-                    </form>
                 </div>
             </div>
         </div>
@@ -177,7 +82,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        const segment = `{{ request()->segment(3) ?? '' }}`
+        const segment = `{{ $santri->id ?? '' }}`
 
 
         function safeJsonStringify(obj) {
@@ -246,29 +151,11 @@
                 },
                 {
                     data: 'catatan'
-                },
-                {
-                    data: null,
-                    render: function(data, type, row) {
-
-                        return `<div class="flex justify-between">
-                                    <button data-target=".modal-form" data-toggle="modal" class="btn btn-success btn-sm mr-1 w-[50px] data-update" data-id="${row?.id}"><i class="fa fa-edit"></i></button> 
-                                    <button  class="btn btn-danger btn-sm ml-1 w-[50px] data-destroy" data-id="${row?.id}"><i class="fa fa-trash"></i></button> 
-                                </div>`;
-                    }
                 }
             ],
         });
 
-        $("#useSiswa").change(function(e) {
-            let useId = $(this).val();
-            UrlId = "/hafalan/siswa-hafalan-show/" + useId;
-            sessionStorage.setItem("uId", useId);
-            $("#card-hafalan").removeClass("hidden");
-            $("#btn-hafalan").removeClass("hidden");
-            $("[name='siswa_id']").val(useId);
-            tables.ajax.url(UrlId).load();
-        });
+
 
         if (segment != undefined && segment != "" && segment != "undefined" && segment != null) {
             UrlId = "/hafalan/siswa-hafalan-show/" + segment;

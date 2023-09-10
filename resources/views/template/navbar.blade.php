@@ -44,6 +44,23 @@
                         </a>
                     </li>
                 @endif
+                @if (auth()->user()->role == 'PIMPINAN' || auth()->user()->role == 'SUPER-ADMIN')
+                    <li class="nav-item">
+                        <a class="nav-link " href="/guru">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-users"></i>
+                            </span><span class="pcoded-mtext">Guru</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/orangtua">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-users"></i>
+                            </span><span class="pcoded-mtext">Orang Tua</span>
+                        </a>
+                    </li>
+                @endif
+
                 @if (auth()->user()->role == 'operator' || auth()->user()->role == 'SUPER-ADMIN')
                     <li class="nav-item">
                         <a class="nav-link " href="/orangtua">
@@ -58,6 +75,7 @@
                                 <i class="feather icon-users"></i>
                             </span><span class="pcoded-mtext">Guru</span>
                         </a>
+                    </li>
                     {{-- <li class="nav-item">
                         <a class="nav-link " href="/pengasuh">
                             <span class="pcoded-micon">
@@ -77,6 +95,25 @@
                             <span class="pcoded-micon">
                                 <i class="lab la-whatsapp"></i>
                             </span><span class="pcoded-mtext">Scann Wa</span>
+                        </a>
+                    </li>
+                @endif
+                @if (auth()->user()->role == 'orangtua' || auth()->user()->role == 'SUPER-ADMIN')
+                    <li class="nav-item">
+                        <a class="nav-link " href="/hafalan/show-hafalan-bywali">
+                            <span class="pcoded-micon">
+                                <i class="fa fa-user"></i>
+                            </span><span class="pcoded-mtext">Laporan Hafalan Santri</span>
+                        </a>
+                    </li>
+                @endif
+
+                @if (auth()->user()->role == 'PIMPINAN' || auth()->user()->role == 'SUPER-ADMIN')
+                    <li class="nav-item">
+                        <a class="nav-link " href="/siswa_register/show-pimpinan">
+                            <span class="pcoded-micon">
+                                <i class="fa fa-user"></i>
+                            </span><span class="pcoded-mtext">Laporan Hafalan Santri</span>
                         </a>
                     </li>
                 @endif

@@ -18,6 +18,10 @@ class SiswaController extends Controller
     {
         return view("Page.Siswa.show");
     }
+    public function showPimpinan()
+    {
+        return view("Page.Siswa.show_pimpinan");
+    }
     public function show_detail($id)
     {
         $data = $this->show_dataId($id);
@@ -62,6 +66,7 @@ class SiswaController extends Controller
         $academicYear = $currentYear . '/' . $nextYear;
         return DataTableFormat::Call()->query(function () use ($academicYear) {
             return Pendaftaran::where("tahun_ajaran", $academicYear)
+                ->where("status", "valid")
                 ->with(["siswa", "OrangTua"]);
         })
             ->formatRecords(function ($result, $start) {
