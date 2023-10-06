@@ -87,16 +87,42 @@
                                     </div>
                                 </div>
                             </div>
+                           
+                            
+                            
+                        
                             <div class="form-group">
                                 <label for="alamat_lengkap">Alamat Lengkap:</label>
                                 <textarea class="form-control" id="alamat_lengkap" name="alamat_lengkap" rows="3"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="orang_tua_checkbox">Orang Tua sudah ada :</label>
+                                        <input type="checkbox" id="orang_tua_checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6" id="orang_tua_id" style="display:none;">
+                                    <div class="form-group">
+                                        <label for="orang_tua_id">Orang Tua:</label>
+                                        <select class="form-control w-full" id="orang_tua_id" name="orang_tua_id">
+                                            <option value="">-- Pilih Orang Tua --</option>
+                                            @foreach ($orangtua as $orangtua)
+                                                <option value="{{ $orangtua->id }}">{{ $orangtua->nama }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <div class="card">
+                <div class="card orang_tua" id="orang_tua_section">
                     <div class="card-header">
                         <h1>DATA ORANGTUA</h1>
                     </div>
@@ -152,13 +178,14 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 mt-5">
-                                    <div class="form-group w-full flex justify-end">
-                                        <button class="w-50 btn btn-primary bg-blue-500" type="submit">DAFTAR</button>
-                                    </div>
-                                </div>
+                            
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-12 mt-5">
+                    <div class="form-group w-full flex justify-end">
+                        <button class="w-50 btn btn-primary bg-blue-500" type="submit">DAFTAR</button>
                     </div>
                 </div>
             </div>
@@ -287,4 +314,22 @@
             destory(url);
         });
     </script>
+    @section('script')
+    <script>
+        $(document).ready(function () {
+            $('#orang_tua_checkbox').change(function () {
+                if (this.checked) {
+                    $('#orang_tua_section').hide();
+                    $('#orang_tua_id').show();
+                    
+                } else {
+                    $('#orang_tua_section').show();
+                    $('#orang_tua_id').hide();
+                }
+            });
+        });
+    </script>
+    @endsection
+    
+    
 @endsection

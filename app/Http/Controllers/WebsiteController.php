@@ -29,7 +29,9 @@ class WebsiteController extends Controller
     }
     public function form()
     {
-        return view("website.pendaftaran");
+        $orangtua = OrangTua::all();
+
+        return view('website.pendaftaran', compact('orangtua'));
     }
     public function tentang()
     {
@@ -50,38 +52,52 @@ class WebsiteController extends Controller
 
     public function store(Request $request)
     {
-
         try {
-            $ortuUser = User::create([
-                'nama' => $request->input('ortu_nama'),
-                'username' => $request->input('ortu_nik'),
-                'password' => bcrypt($request->input('ortu_nik')),
-                'role' => 'orangtua'
-            ]);
-            $orangtua = [
-                "user_id" => $ortuUser->id,
-                "nik" => $request->input("ortu_nik"),
-                "nama" => $request->input("ortu_nama"),
-                "jenis_kelamin" => $request->input("ortu_jenis_kelamin"),
-                "tempat_lahir" => $request->input("ortu_tempat_lahir"),
-                "tanggal_lahir" => $request->input("ortu_tanggal_lahir"),
-                "telepon" => $request->input("ortu_telepon"),
-                "alamat_lengkap" => $request->input("ortu_alamat_lengkap")
-            ];
-
-            if (!$insOrangtuaSave = OrangTua::create($orangtua)) {
-                throw new \Exception("pastikan data anda input dengan benar dan tidak boleh kosong!");
+            $orangTuaID = null;
+            
+            if ($request->has('orang_tua_id') && $request->input('orang_tua_id') != '') {
+                // Jika orang tua sudah ada, gunakan ID yang ada
+                $orangTuaID = $request->input('orang_tua_id');
+            } else {
+                // Jika orang tua belum ada, buat orang tua baru
+                $ortuUser = User::create([
+                    'nama' => $request->input('ortu_nama'),
+                    'username' => $request->input('ortu_nik'),
+                    'password' => bcrypt($request->input('ortu_nik')),
+                    'role' => 'orangtua'
+                ]);
+    
+                $orangtua = [
+                    "user_id" => $ortuUser->id,
+                    "nik" => $request->input("ortu_nik"),
+                    "nama" => $request->input("ortu_nama"),
+                    "jenis_kelamin" => $request->input("ortu_jenis_kelamin"),
+                    "tempat_lahir" => $request->input("ortu_tempat_lahir"),
+                    "tanggal_lahir" => $request->input("ortu_tanggal_lahir"),
+                    "telepon" => $request->input("ortu_telepon"),
+                    "alamat_lengkap" => $request->input("ortu_alamat_lengkap")
+                ];
+    
+                $insOrangtuaSave = OrangTua::create($orangtua);
+    
+                if (!$insOrangtuaSave) {
+                    throw new \Exception("Gagal membuat data orang tua!");
+                }
+    
+                $orangTuaID = $insOrangtuaSave->id;
             }
-
+    
+            // Tambahkan siswa dengan ID orang tua (baik yang sudah ada atau baru)
             $siswaUser = User::create([
                 'nama' => $request->input('nama_lengkap'),
                 'username' => $request->input('nis'),
                 'password' => bcrypt($request->input('nis')),
                 'role' => 'siswa'
             ]);
+    
             $siswa = [
                 "user_id" => $siswaUser->id,
-                "orang_tua_id" => $insOrangtuaSave->id,
+                "orang_tua_id" => $orangTuaID,
                 "nis" => $request->input("nis"),
                 "nama_lengkap" => $request->input("nama_lengkap"),
                 "jenis_kelamin" => $request->input("jenis_kelamin"),
@@ -91,8 +107,7 @@ class WebsiteController extends Controller
                 "alamat_lengkap" => $request->input("alamat_lengkap"),
                 "status_siswa" => "inActive"
             ];
-
-            // dd($siswa, $orangtua);
+    
             if (!$insSiswaSave = Siswa::create($siswa)) {
                 throw new \Exception("pastikan data anda input dengan benar dan tidak boleh kosong!");
             }
@@ -103,12 +118,13 @@ class WebsiteController extends Controller
 
 
             $pendaftaran = [
+                'user_pendaftar_id' => auth()->user()->id ?? 1,
                 'siswa_id' => $insSiswaSave->id,
-                'orang_tua_id' => $insOrangtuaSave->id,
+                'orang_tua_id' => $orangTuaID,
                 'tahun_ajaran' => $request->input("tahun_ajaran") ?? "2023/2024",
                 'asal_sekolah' => $request->input("asal_sekolah"),
-                'metode_pendaftaran' => "Daftar mandiri",
-                'lampiran' => $useUpload->name,
+                'metode_pendaftaran' => "operator",
+                'lampiran' => null,
                 'status' => "pending",
             ];
             if (!$insPendaftaranSave = Pendaftaran::create($pendaftaran)) {

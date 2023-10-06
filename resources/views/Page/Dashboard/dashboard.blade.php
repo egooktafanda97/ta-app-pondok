@@ -1,28 +1,5 @@
 @extends('template.layout')
 @section('content')
-<<<<<<< HEAD
-
-<div class="container">
-    <div class="row  mb-4">
-        <div class="col-sm">
-            <img src="{{ asset('landing-page') }}/img/1.jpg" class="img-fluid rounded" alt="...">        </div>
-        <div class="col-sm">
-            <img  src="{{ asset('landing-page') }}/img/2.jpg" class="img-fluid rounded" alt="...">        </div>     
-    </div>
-    <div class="row mb-4">
-        <div class="col-sm">
-            <img src="{{ asset('landing-page') }}/img/3.jpg" class="img-fluid rounded" alt="...">        </div>
-        <div class="col-sm">
-            <img  src="{{ asset('landing-page') }}/img/4.jpg" class="img-fluid rounded" alt="...">        </div>     
-    </div>
-    <div class="row mb-4">
-        <div class="col-sm">
-            <img src="{{ asset('landing-page') }}/img/5.jpg" class="img-fluid rounded" alt="...">        </div>
-        <div class="col-sm">
-            <img  src="{{ asset('landing-page') }}/img/6.jpg" class="img-fluid rounded" alt="...">        </div>     
-    </div>
-</div>
-=======
     <div class="page-header">
         <div class="page-block">
             <div class="row align-items-center">
@@ -95,5 +72,4 @@
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
->>>>>>> 6eabd4acc0d48976ec6f4a0d53efddda1ce537af
 @endsection
